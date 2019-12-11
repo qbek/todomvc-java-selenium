@@ -60,4 +60,27 @@ public class BasicInteractionTest {
         Thread.sleep(2000);
         browser.quit();
     }
+
+    @Test
+    public void radioButtonsTest() {
+        WebDriver browser = new FirefoxDriver();
+        browser.get("http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html");
+        browser.manage().window().maximize();
+
+        WebElement pumpkinSelect = browser.findElement(By.cssSelector("[value=\"pumpkin\"]"));
+        WebElement yellowSelect = browser.findElement(By.cssSelector("[value=\"yellow\"]"));
+        WebElement blueSelect = browser.findElement(By.cssSelector("[value=\"blue\"]"));
+
+        boolean isPumpkinSelected = pumpkinSelect.isSelected();
+        Assert.assertEquals("Pumpkin shall be selected", true, isPumpkinSelected);
+
+        yellowSelect.click();
+        blueSelect.click();
+
+        boolean isYellowSelected = yellowSelect.isSelected();
+        Assert.assertEquals("Yellow shall be NOT selected", false, isYellowSelected);
+
+        browser.quit();
+
+    }
 }
