@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertEquals;
 
@@ -81,6 +82,29 @@ public class BasicInteractionTest {
         Assert.assertEquals("Yellow shall be NOT selected", false, isYellowSelected);
 
         browser.quit();
-
     }
+
+    @Test
+    public void selectMenuTest() throws InterruptedException {
+        WebDriver browser = new FirefoxDriver();
+        browser.get("http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html");
+        browser.manage().window().maximize();
+
+        WebElement languageSelect = browser.findElement(By.cssSelector("#dropdowm-menu-1"));
+        Select language = new Select(languageSelect);
+
+        WebElement selectedItem = language.getFirstSelectedOption();
+        String selectedText = selectedItem.getText();
+        Assert.assertEquals("There should be JAVA!!!!", "JAVA", selectedText);
+
+        WebElement toolsSelect = browser.findElement(By.cssSelector("#dropdowm-menu-2"));
+        Select tools = new Select(toolsSelect);
+
+        tools.selectByIndex(1);
+        Thread.sleep(2000);
+
+        browser.quit();
+    }
+
+
 }
