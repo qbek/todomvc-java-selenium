@@ -22,10 +22,6 @@ public class CreatingTodoTest {
     @Managed(driver = "firefox")
     WebDriver browser;
 
-    By todoCompleteToggleSelector = By.cssSelector(".todo-list input.toggle");
-    By todoItemSelector = By.cssSelector(".todo-list li");
-    By activeTabSelector = By.cssSelector(".filters [href=\"#/active\"]");
-    By completedTabSelector = By.cssSelector(".filters [href=\"#/completed\"]");
 
     @Steps
     SetupAndTeardownSteps setup;

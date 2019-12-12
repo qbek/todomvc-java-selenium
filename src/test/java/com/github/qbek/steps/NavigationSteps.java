@@ -1,16 +1,20 @@
 package com.github.qbek.steps;
 
+import com.github.qbek.pageobjects.NavigationBar;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebElement;
 
 public class NavigationSteps {
 
-//    public void userSwitchesToCompletedTab() {
-//        WebElement active = browser.findElement(completedTabSelector);
-//        active.click();
-//    }
-//
-//    public void userSwitchesToActiveTab() {
-//        WebElement active = browser.findElement(activeTabSelector);
-//        active.click();
-//    }
+    NavigationBar navBar = new NavigationBar();
+
+    @Step
+    public void userSwitchesToCompletedTab() {
+        navBar.goToCompletedTodos();
+    }
+
+    @Step
+    public void userSwitchesToActiveTab() {
+        navBar.goToActiveTodos();
+    }
 }

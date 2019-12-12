@@ -1,6 +1,7 @@
 package com.github.qbek.steps;
 
 import com.github.qbek.pageobjects.TodoInput;
+import com.github.qbek.pageobjects.TodoItem;
 import com.github.qbek.pageobjects.TodosList;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
@@ -12,22 +13,24 @@ public class TodoSteps {
 
     TodosList todoList = new TodosList();
 
-//    public void userChecksIfTodoNotExist() {
-//        WebElement todos = browser.findElement(todoList);
-//        String allTodos = todos.getText();
-//        Assert.assertEquals("There should not be a completed TODO on active tab", "", allTodos);
-//    }
-//
-//    public void userChecksIfTodoIsCompleted() {
-//        WebElement todo = browser.findElement(todoItemSelector);
-//        String todoClasses = todo.getAttribute("class");
-//        Assert.assertEquals("This todo shall be completed", "completed", todoClasses);
-//    }
-//
-//    public void userCompletesATodo() {
-//        WebElement toggleCheckbox = browser.findElement(todoCompleteToggleSelector);
-//        toggleCheckbox.click();
-//    }
+    TodoItem todo = new TodoItem();
+
+    @Step
+    public void userChecksIfTodoNotExist() {
+        String allTodos = todoList.getAllTodos();
+        Assert.assertEquals("There should not be a completed TODO on active tab", "", allTodos);
+    }
+
+    @Step
+    public void userChecksIfTodoIsCompleted() {
+        String todoClasses = todo.getTodoClasses();
+        Assert.assertEquals("This todo shall be completed", "completed", todoClasses);
+    }
+
+    @Step
+    public void userCompletesATodo() {
+        todo.completeATodo();
+    }
 
     @Step
     public void userCreatesANewTodo(String todoToCreate) {
