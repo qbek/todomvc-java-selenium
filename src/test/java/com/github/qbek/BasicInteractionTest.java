@@ -1,6 +1,8 @@
 package com.github.qbek;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +10,34 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class BasicInteractionTest {
+
+    String pageUrl = "http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
+    By option1Selector = By.cssSelector("[value=\"option-1\"]");
+    By option2Selector = By.cssSelector("[value=\"option-2\"]");
+    By option3Selector = By.cssSelector("[value=\"option-3\"]");
+    By option4Selector = By.cssSelector("[value=\"option-4\"]");
+    By firstDropDownMenuSelector = By.cssSelector("#dropdowm-menu-1");
+
+    int sleepTime = 2000;
+
+    WebDriver browser;
+
+    @Before
+    public void testSetup() {
+        browser = new FirefoxDriver();
+        browser.get(pageUrl);
+        browser.manage().window().maximize();
+    }
+
+    @After
+    public void cleanItUp() {
+        browser.quit();
+    }
 
     @Test
     public void handleInputs() throws InterruptedException {
@@ -39,35 +66,26 @@ public class BasicInteractionTest {
 
     @Test
     public void checkBoxesTest() throws InterruptedException {
-        WebDriver browser = new FirefoxDriver();
-        browser.get("http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html");
-        browser.manage().window().maximize();
+        WebElement option1Checkbox = browser.findElement(option1Selector);
+        WebElement option2Checkbox = browser.findElement(option2Selector);
+        WebElement option3Checkbox = browser.findElement(option3Selector);
+        WebElement option4Checkbox = browser.findElement(option4Selector);
 
-        WebElement option1Checkbox = browser.findElement(By.cssSelector("[value=\"option-1\"]"));
-        WebElement option2Checkbox = browser.findElement(By.cssSelector("[value=\"option-2\"]"));
-        WebElement option3Checkbox = browser.findElement(By.cssSelector("[value=\"option-3\"]"));
-        WebElement option4Checkbox = browser.findElement(By.cssSelector("[value=\"option-4\"]"));
 
-        boolean isOption1Select = option1Checkbox.isSelected();
-        Assert.assertEquals("Option-1 should be unselected", false, isOption1Select);
+        boolean isOption1Selected = option1Checkbox.isSelected();
+        Assert.assertEquals("Option-1 should be unselected", true, isOption1Selected);
 
         boolean isOption3Selected = option3Checkbox.isSelected();
         Assert.assertEquals("Option-3 should be selected", true, isOption3Selected);
 
-
         option2Checkbox.click();
         option3Checkbox.click();
 
-        Thread.sleep(2000);
-        browser.quit();
+        Thread.sleep(sleepTime);
     }
 
     @Test
     public void radioButtonsTest() {
-        WebDriver browser = new FirefoxDriver();
-        browser.get("http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html");
-        browser.manage().window().maximize();
-
         WebElement pumpkinSelect = browser.findElement(By.cssSelector("[value=\"pumpkin\"]"));
         WebElement yellowSelect = browser.findElement(By.cssSelector("[value=\"yellow\"]"));
         WebElement blueSelect = browser.findElement(By.cssSelector("[value=\"blue\"]"));
@@ -80,16 +98,10 @@ public class BasicInteractionTest {
 
         boolean isYellowSelected = yellowSelect.isSelected();
         Assert.assertEquals("Yellow shall be NOT selected", false, isYellowSelected);
-
-        browser.quit();
     }
 
     @Test
     public void selectMenuTest() throws InterruptedException {
-        WebDriver browser = new FirefoxDriver();
-        browser.get("http://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html");
-        browser.manage().window().maximize();
-
         WebElement languageSelect = browser.findElement(By.cssSelector("#dropdowm-menu-1"));
         Select language = new Select(languageSelect);
 
@@ -103,8 +115,25 @@ public class BasicInteractionTest {
         tools.selectByIndex(1);
         Thread.sleep(2000);
 
-        browser.quit();
     }
 
+    @Test
+    public void iterateThroughMenuItems() throws InterruptedException {
+        WebElement firstMenuList = browser.findElement(firstDropDownMenuSelector);
+        Select menuSelect = new Select(firstMenuList);
+        List<WebElement> options = menuSelect.getOptions();
+
+        firstMenuList.getAttribute("class");
+        System.out.println("Count of options: " + options.size());
+
+        for (WebElement singleOption : options) {
+            String optionValue = singleOption.getAttribute("value");
+            menuSelect.selectByValue(optionValue);
+            Thread.sleep(sleepTime);
+        }
+
+
+
+    }
 
 }
