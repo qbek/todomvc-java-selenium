@@ -46,6 +46,14 @@ public class CreatingTodoTest {
         step.userChecksIfTodoIsListed(todoName);
     }
 
+    @Test
+    public void userCanCreateATodoAndWaitForIt() {
+        String todoName = "Learn Selenium + JAVA";
+//        step.userCreatesANewTodo(todoName);
+        step.userWaitsForATodoToBeCreated();
+        step.userChecksIfTodoIsListed(todoName);
+    }
+
 
     @Test
     public void userCanCreateMultipleTodos() {

@@ -1,14 +1,17 @@
 package com.github.qbek.steps;
 
+import com.github.qbek.aux.WaitForAnElement;
 import com.github.qbek.pageobjects.TodoInput;
 import com.github.qbek.pageobjects.TodoItem;
 import com.github.qbek.pageobjects.TodosList;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
+import org.awaitility.Awaitility;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.util.List;
 
 public class TodoSteps {
@@ -67,5 +70,18 @@ public class TodoSteps {
         for (String name : todoNames) {
             userCreatesANewTodo(name);
         }
+    }
+
+    public void userWaitsForATodoToBeCreated() {
+        //lets code a waiting function
+        WaitForAnElement elementIsFound = new WaitForAnElement(todo);
+        System.out.println("Starting to wait:");
+        Awaitility.await()
+                .atMost(Duration.ofSeconds(30))
+                .pollInterval(Duration.ofSeconds(1))
+                .until(elementIsFound);
+        System.out.println("Waiting has finished!");
+
+
     }
 }
