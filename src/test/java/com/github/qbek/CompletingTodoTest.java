@@ -6,6 +6,8 @@ import com.github.qbek.steps.TodoSteps;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.WithTag;
+import net.thucydides.core.annotations.WithTags;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,10 +35,11 @@ public class CompletingTodoTest {
     }
 
     @Test
+    @WithTags({@WithTag("smoke"), @WithTag("test")})
     public void userCanCompleteATodo(){
         String todoName = "Todo to be completed";
         actions.userCreatesANewTodo(todoName);
-//        actions.userCompletesATodo();
+        actions.userCompletesATodo();
         actions.userChecksIfTodoIsCompleted();
     }
 

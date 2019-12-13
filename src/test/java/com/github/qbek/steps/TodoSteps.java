@@ -4,9 +4,12 @@ import com.github.qbek.pageobjects.TodoInput;
 import com.github.qbek.pageobjects.TodoItem;
 import com.github.qbek.pageobjects.TodosList;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class TodoSteps {
     TodoInput todoInput = new TodoInput();
@@ -57,5 +60,12 @@ public class TodoSteps {
     @Step("User sees a todo: {0} on the todo list")
     public void userSeesATodoWithName(String expectedTodo, String allTodos) {
         Assert.assertEquals("User todo should be created", expectedTodo, allTodos);
+    }
+
+    @Step
+    public void userCreatesFewTodos(List<String> todoNames) {
+        for (String name : todoNames) {
+            userCreatesANewTodo(name);
+        }
     }
 }
