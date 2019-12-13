@@ -1,5 +1,7 @@
 package com.github.qbek;
 
+import com.github.javafaker.Faker;
+import com.github.qbek.aux.DataGenerator;
 import com.github.qbek.steps.SetupAndTeardownSteps;
 import com.github.qbek.steps.TodoSteps;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -26,12 +28,14 @@ public class CreatingTodoTest {
     @Managed(driver = "firefox")
     WebDriver browser;
 
-
     @Steps
     SetupAndTeardownSteps setup;
 
     @Steps
     TodoSteps step;
+
+    @Steps
+    DataGenerator data;
 
     @Before
     public void setup() {
@@ -41,27 +45,30 @@ public class CreatingTodoTest {
     @Test
     @WithTag("smoke")
     public void userCanCreateATodo() {
-        String todoName = "Learn Selenium + JAVA";
+        String todoName = data.generateTodoName();
         step.userCreatesANewTodo(todoName);
         step.userChecksIfTodoIsListed(todoName);
     }
 
     @Test
     public void userCanCreateATodoAndWaitForIt() {
-        String todoName = "Learn Selenium + JAVA";
-//        step.userCreatesANewTodo(todoName);
+        String todoName = data.generateTodoName();
+        step.userCreatesANewTodo(todoName);
         step.userWaitsForATodoToBeCreated();
         step.userChecksIfTodoIsListed(todoName);
     }
 
 
     @Test
-    public void userCanCreateMultipleTodos() {
-        List<String> todoNames = new ArrayList<>();
-        todoNames.add("First todo");
-        todoNames.add("Second todo");
+    public void userCanCreateMultipleTodos() throws InterruptedException {
+        List<String> todoNames = data.generateFewTodos();
+        String todoToComplete = data.generateTodoName();
+        System.out.println("Todo to complete: " + todoToComplete);
         step.userCreatesFewTodos(todoNames);
-//        step.userChecksIfAllTodosAreCreated();
+        step.userCreatesANewTodo(todoToComplete);
+        step.userCreatesFewTodos(todoNames);
+        step.userCompletesATodoWithName(todoToComplete);
+        Thread.sleep(5000);
     }
 
     @After

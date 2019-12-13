@@ -84,4 +84,9 @@ public class TodoSteps {
 
 
     }
+
+    @Step
+    public void userCompletesATodoWithName(String todoToComplete) {
+        todoList.completeTodo(todoToComplete);
+    }
 }

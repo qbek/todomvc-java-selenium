@@ -1,5 +1,6 @@
 package com.github.qbek;
 
+import com.github.qbek.aux.DataGenerator;
 import com.github.qbek.steps.NavigationSteps;
 import com.github.qbek.steps.SetupAndTeardownSteps;
 import com.github.qbek.steps.TodoSteps;
@@ -29,6 +30,8 @@ public class CompletingTodoTest {
     @Steps
     NavigationSteps navigation;
 
+    DataGenerator data = new DataGenerator();
+
     @Before
     public void setup() {
         setup.userOpensTodoMvcApp();
@@ -37,7 +40,7 @@ public class CompletingTodoTest {
     @Test
     @WithTags({@WithTag("smoke"), @WithTag("test")})
     public void userCanCompleteATodo(){
-        String todoName = "Todo to be completed";
+        String todoName = data.generateTodoName();
         actions.userCreatesANewTodo(todoName);
         actions.userCompletesATodo();
         actions.userChecksIfTodoIsCompleted();
@@ -45,7 +48,7 @@ public class CompletingTodoTest {
 
     @Test
     public void completedTodoIsNotOnActiveTab() {
-        String todoName = "Todo to be completed";
+        String todoName = data.generateTodoName();
         actions.userCreatesANewTodo(todoName);
         actions.userCompletesATodo();
         navigation.userSwitchesToActiveTab();
@@ -54,7 +57,7 @@ public class CompletingTodoTest {
 
     @Test
     public void completedTodoIsOnCompletedTab() {
-        String todoName = "Todo to be completed";
+        String todoName = data.generateTodoName();
         actions.userCreatesANewTodo(todoName);
         actions.userCompletesATodo();
         navigation.userSwitchesToCompletedTab();
