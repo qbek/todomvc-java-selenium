@@ -25,13 +25,13 @@ public class CompleteTodoTest extends Base {
         steps.userCompletesTheTodo();
         steps.userChecksIfCompletedTodoIsNOTonActiveList(todoName);
     }
-    
+
     @Test
     public void user_can_filter_completed_todos() throws InterruptedException {
         String todoName = "Zadanie do zakończenia";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
-        steps.userCompletesTheTodo();
+//        steps.userCompletesTheTodo();
         steps.userChecksIfCompletedTodoIsOnCompletedList(todoName);
     }
 }

@@ -1,5 +1,7 @@
 package org.example.steps;
 
+import net.serenitybdd.core.Serenity;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,13 +13,10 @@ import static org.hamcrest.Matchers.containsString;
 
 public class UserActions {
 
-    private WebDriver browser;
-
-    public UserActions(WebDriver browser) {
-        this.browser = browser;
-    }
+    private WebDriver browser = Serenity.getDriver();
 
 
+    @Step
     public void userOpensTodoMvcApplication() throws InterruptedException {
         int sleepTime = 1000;
         String todoMVC_URL = "https://todomvc.com/examples/jquery/#/all";
@@ -25,6 +24,7 @@ public class UserActions {
         Thread.sleep(sleepTime);
     }
 
+    @Step
     public void userCreatesANewTodo(String name) {
         By inputTodo = By.cssSelector(".new-todo");
         WebElement newTodoInput = browser.findElement(inputTodo);
@@ -32,6 +32,7 @@ public class UserActions {
         newTodoInput.sendKeys(Keys.RETURN);
     }
 
+    @Step
     public void userChecksIfTodoWasCreated(String expectedName) {
         By todoList = By.cssSelector(".todo-list li");
         WebElement todos = browser.findElement(todoList);
@@ -39,12 +40,14 @@ public class UserActions {
         assertThat("Todo list shoudl contain created todo", todoName, equalTo(expectedName));
     }
 
+    @Step
     public void userCompletesTheTodo() {
         By completeToggle = By.cssSelector(".todo-list li .toggle");
         WebElement toComplete = browser.findElement(completeToggle);
         toComplete.click();
     }
 
+    @Step
     public void userChecksIfTodoIsMarkedAsCompleted() {
         String completitionMark = "completed";
         By todoElement = By.cssSelector(".todo-list li");
@@ -53,6 +56,7 @@ public class UserActions {
         assertThat("Todo should be marked as completed", todoClasses, equalTo(completitionMark));
     }
 
+    @Step
     public void userChecksIfCompletedTodoIsNOTonActiveList(String completedName) {
         By activeFilterElement = By.cssSelector(".filters [href=\"#/active\"]");
         By todoListElement = By.cssSelector(".todo-list");
@@ -61,6 +65,7 @@ public class UserActions {
         assertThat("Completed todo is not on active list", todos.getText(), not(containsString(completedName)));
     }
 
+    @Step
     public void userChecksIfCompletedTodoIsOnCompletedList(String completedName) {
         By completedFilterElement = By.cssSelector(".filters [href=\"#/completed\"]");
         By todoListElement = By.cssSelector(".todo-list");
