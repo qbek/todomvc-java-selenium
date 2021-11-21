@@ -1,13 +1,31 @@
 package org.example.data;
 
-import com.github.javafaker.Faker;
 
 public class DataGenerator {
 
-    private Faker dataGenerator = new Faker();
+    private RandomDataProvider randomData = new RandomDataProvider();
+    private StaticDataProvider staticData = new StaticDataProvider();
+    private DatabaseDataProvider databaseData = new DatabaseDataProvider();
 
-    public String getTodoName() {
-       return dataGenerator.funnyName().name();
+    private String data = System.getProperty("data");
+
+    private DataProviderInterface getDataProvider() {
+        if (data.equals("random")) {
+            return randomData;
+        } else if (data.equals("static")) {
+           return staticData;
+        } else if (data.equals("db")) {
+            return databaseData;
+        } else {
+            throw new RuntimeException("Nie ma takiego zestawu danych!!!");
+        }
     }
 
+    public String getTodoName() {
+        return getDataProvider().getTodoName();
+    }
+
+    public String getProjectName() {
+        return getDataProvider().getProjectName();
+    }
 }
