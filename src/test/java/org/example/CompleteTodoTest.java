@@ -1,10 +1,6 @@
 package org.example;
 
-import org.example.steps.UserActions;
-import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class CompleteTodoTest extends Base {
 
@@ -31,7 +27,7 @@ public class CompleteTodoTest extends Base {
         String todoName = "Zadanie do zakończenia";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
-//        steps.userCompletesTheTodo();
+        steps.userCompletesTheTodo();
         steps.userChecksIfCompletedTodoIsOnCompletedList(todoName);
     }
 }
