@@ -13,4 +13,10 @@ public class CreateTodoTest extends Base {
         steps.userChecksIfTodoWasCreated(todoName);
     }
 
+
+    @Test
+    public void wait_for_todo_STOP() {
+        steps.userOpensTodoMvcApplication();
+        steps.waitForStopTodo();
+    }
 }

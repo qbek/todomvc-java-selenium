@@ -62,4 +62,9 @@ public class UserActions {
         filters.switchToCompleted();
         todosList.checkIfTodoIsOnTheList(completedName);
     }
+
+
+    public void waitForStopTodo() {
+        todosList.waitForStop();
+    }
 }
