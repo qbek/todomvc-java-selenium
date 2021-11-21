@@ -3,6 +3,7 @@ package org.example;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
+import org.example.data.DataGenerator;
 import org.example.steps.UserActions;
 import org.junit.After;
 import org.junit.runner.RunWith;
@@ -16,6 +17,9 @@ public class Base {
 
     @Steps
     UserActions steps;
+
+    @Steps
+    DataGenerator data;
 
     @After
     public void finishTest() {

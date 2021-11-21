@@ -8,7 +8,7 @@ public class CompleteTodoTest extends Base {
 
     @Test
     public void user_can_complete_the_todo() {
-        String todoName = "Zadanie do zakończenia";
+        String todoName = data.getTodoName();
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
         steps.userCompletesTheTodo();
@@ -17,7 +17,7 @@ public class CompleteTodoTest extends Base {
 
     @Test
     public void user_can_filter_active_todos() {
-        String todoName = "Zadanie do zakończenia";
+        String todoName = data.getTodoName();
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
         steps.userCompletesTheTodo();
@@ -26,7 +26,7 @@ public class CompleteTodoTest extends Base {
 
     @Test
     public void user_can_filter_completed_todos() {
-        String todoName = "Zadanie do zakończenia";
+        String todoName = data.getTodoName();
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
         steps.userCompletesTheTodo();
