@@ -14,4 +14,10 @@ public class HelloWorldTest {
         browser.close();
     }
 
+    @Test
+    public void testSystemProperties() {
+        String testValue = System.getProperty("key");
+        System.out.println(testValue);
+    }
+
 }

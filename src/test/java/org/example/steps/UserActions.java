@@ -9,6 +9,8 @@ import org.example.pageobjects.TodoMvcApp;
 import org.example.pageobjects.TodosList;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 public class UserActions {
 
     @Steps

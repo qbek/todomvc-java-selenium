@@ -2,10 +2,12 @@ package org.example;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class CompleteTodoTest extends Base {
 
     @Test
-    public void user_can_complete_the_todo() throws InterruptedException {
+    public void user_can_complete_the_todo() {
         String todoName = "Zadanie do zakończenia";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
@@ -14,7 +16,7 @@ public class CompleteTodoTest extends Base {
     }
 
     @Test
-    public void user_can_filter_active_todos() throws InterruptedException {
+    public void user_can_filter_active_todos() {
         String todoName = "Zadanie do zakończenia";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
@@ -23,7 +25,7 @@ public class CompleteTodoTest extends Base {
     }
 
     @Test
-    public void user_can_filter_completed_todos() throws InterruptedException {
+    public void user_can_filter_completed_todos() {
         String todoName = "Zadanie do zakończenia";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);

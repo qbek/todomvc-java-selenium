@@ -2,11 +2,13 @@ package org.example;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 
 public class CreateTodoTest extends Base {
 
     @Test
-    public void user_can_create_a_new_todo() throws InterruptedException {
+    public void user_can_create_a_new_todo() throws IOException {
         String todoName = "Nauczyć się automatyzacji testów";
         steps.userOpensTodoMvcApplication();
         steps.userCreatesANewTodo(todoName);
