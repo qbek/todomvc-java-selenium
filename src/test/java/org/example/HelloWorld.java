@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HelloWorld {
 
     @Test
@@ -17,4 +20,5 @@ public class HelloWorld {
         browser.close();
 
     }
+
 }

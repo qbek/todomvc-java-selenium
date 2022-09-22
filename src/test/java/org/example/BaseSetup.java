@@ -1,5 +1,7 @@
 package org.example;
 
+import com.github.javafaker.Faker;
+import io.cucumber.java.tr.Fakat;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -16,8 +18,11 @@ public abstract class BaseSetup {
     @Steps
     protected UserSteps step;
 
-    @Managed(driver = "firefox")
+    @Managed(driver = "chrome")
     WebDriver browser;
+
+    protected static Faker dataGenerator = new Faker();
+
 
     @BeforeEach
     public void setup() {
@@ -26,7 +31,7 @@ public abstract class BaseSetup {
 
     @AfterEach
     public void cleanUp() {
-        step.userClosesTodoMVCApp();
+//        step.userClosesTodoMVCApp();
     }
 
 }

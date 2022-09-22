@@ -2,6 +2,7 @@ package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 
 public class TodoMVCApp extends PageObject {
 
@@ -16,4 +17,5 @@ public class TodoMVCApp extends PageObject {
     public void closeTodoMVC() {
         getDriver().close();
     }
+
 }

@@ -8,6 +8,8 @@ import org.example.pageobjects.TodoMVCApp;
 import org.example.pageobjects.TodosList;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class UserSteps {
 
     @Steps
@@ -38,12 +40,16 @@ public class UserSteps {
     @Step
     public void userChecksIfTodoIsMarkedAsCompleted() {
         todosList.checkIfTodoCompleted();
-
     }
 
     @Step
     public void userCompletesTodo() {
         todosList.completeTodo();
+    }
+
+    @Step
+    public void userCompletesTodo(String todoName) {
+        todosList.completeTodo(todoName);
     }
 
     @Step
@@ -64,5 +70,12 @@ public class UserSteps {
     @Step
     public void userClosesTodoMVCApp() {
         app.closeTodoMVC();
+    }
+
+    @Step
+    public void userAddsTodos(List<String> todos) {
+        for (String todo : todos) {
+            userAddsANewTodo(todo);
+        }
     }
 }

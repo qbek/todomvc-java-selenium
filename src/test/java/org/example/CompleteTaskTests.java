@@ -1,12 +1,15 @@
 package org.example;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class CompleteTaskTests extends BaseSetup {
 
     @Test
     public void userCanCompleteTheTodo() {
-        var todoName = "Ten task jest zakończony";
+        var todoName = dataGenerator.chuckNorris().fact();
         step.userAddsANewTodo(todoName);
         step.userCompletesTodo();
         step.userChecksIfTodoIsMarkedAsCompleted();
@@ -14,7 +17,7 @@ public class CompleteTaskTests extends BaseSetup {
 
     @Test
     public void completedTaskIsFilteredOutOnActiveFilter() {
-        var todoName = "Ten task jest zakończony";
+        var todoName = dataGenerator.witcher().character();
         step.userAddsANewTodo(todoName);
         step.userCompletesTodo();
         step.userChecksIfCompletedTaskIsNotOnActiveTab(todoName);
@@ -22,9 +25,20 @@ public class CompleteTaskTests extends BaseSetup {
 
     @Test
     public void completedTaskInOnCompletedFilter() {
-        var todoName = "Ten task jest zakończony";
+        var todoName = dataGenerator.business().creditCardType();
         step.userAddsANewTodo(todoName);
         step.userCompletesTodo();
         step.userChecksIfCompletedTaskIsOnCompletedTab(todoName);
+    }
+
+    @Test
+    public void userCanCompleteTHE_ONE() throws InterruptedException {
+        List<String> todos = dataGenerator.lorem().sentences(dataGenerator.number().numberBetween(0, 4));
+        step.userAddsTodos(todos);
+        step.userAddsANewTodo("THE ONE");
+        todos = dataGenerator.lorem().sentences(dataGenerator.number().numberBetween(0, 4));
+        step.userAddsTodos(todos);
+        step.userCompletesTodo("THE ONE");
+        Thread.sleep(2000);
     }
 }
