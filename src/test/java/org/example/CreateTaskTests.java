@@ -13,6 +13,11 @@ public class CreateTaskTests extends BaseSetup {
         var todoName = dataGenerator.dragonBall().character();
         step.userAddsANewTodo(todoName);
         step.userChecksIfTodoIsCreated(todoName);
+    }
+
+    @Test
+    public void userDeletesTodo() {
+        step.userAddsANewTodo("aaaa");
 
     }
 

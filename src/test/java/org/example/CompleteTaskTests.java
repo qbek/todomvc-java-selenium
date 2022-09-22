@@ -11,15 +11,15 @@ public class CompleteTaskTests extends BaseSetup {
     public void userCanCompleteTheTodo() {
         var todoName = dataGenerator.chuckNorris().fact();
         step.userAddsANewTodo(todoName);
-        step.userCompletesTodo();
-        step.userChecksIfTodoIsMarkedAsCompleted();
+        step.userCompletesTodo(todoName);
+        step.userChecksIfTodoIsMarkedAsCompleted(todoName);
     }
 
     @Test
     public void completedTaskIsFilteredOutOnActiveFilter() {
         var todoName = dataGenerator.witcher().character();
         step.userAddsANewTodo(todoName);
-        step.userCompletesTodo();
+        step.userCompletesTodo(todoName);
         step.userChecksIfCompletedTaskIsNotOnActiveTab(todoName);
     }
 
@@ -27,7 +27,7 @@ public class CompleteTaskTests extends BaseSetup {
     public void completedTaskInOnCompletedFilter() {
         var todoName = dataGenerator.business().creditCardType();
         step.userAddsANewTodo(todoName);
-        step.userCompletesTodo();
+        step.userCompletesTodo(todoName);
         step.userChecksIfCompletedTaskIsOnCompletedTab(todoName);
     }
 
@@ -39,6 +39,7 @@ public class CompleteTaskTests extends BaseSetup {
         todos = dataGenerator.lorem().sentences(dataGenerator.number().numberBetween(0, 4));
         step.userAddsTodos(todos);
         step.userCompletesTodo("THE ONE");
+        step.userChecksIfTodoIsMarkedAsCompleted("THE ONE");
         Thread.sleep(2000);
     }
 }

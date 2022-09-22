@@ -38,13 +38,8 @@ public class UserSteps {
     }
 
     @Step
-    public void userChecksIfTodoIsMarkedAsCompleted() {
-        todosList.checkIfTodoCompleted();
-    }
-
-    @Step
-    public void userCompletesTodo() {
-        todosList.completeTodo();
+    public void userChecksIfTodoIsMarkedAsCompleted(String todoName) {
+        todosList.checkIfTodoCompleted(todoName);
     }
 
     @Step
@@ -78,4 +73,5 @@ public class UserSteps {
             userAddsANewTodo(todo);
         }
     }
+
 }
