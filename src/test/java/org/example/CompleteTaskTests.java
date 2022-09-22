@@ -9,26 +9,23 @@ public class CompleteTaskTests extends BaseSetup {
 
     @Test
     public void userCanCompleteTheTodo() {
-        var todoName = dataGenerator.chuckNorris().fact();
-        step.userAddsANewTodo(todoName);
-        step.userCompletesTodo(todoName);
-        step.userChecksIfTodoIsMarkedAsCompleted(todoName);
+        step.userAddsANewTodo();
+        step.userCompletesTodo();
+        step.userChecksIfTodoIsMarkedAsCompleted();
     }
 
     @Test
     public void completedTaskIsFilteredOutOnActiveFilter() {
-        var todoName = dataGenerator.witcher().character();
-        step.userAddsANewTodo(todoName);
-        step.userCompletesTodo(todoName);
-        step.userChecksIfCompletedTaskIsNotOnActiveTab(todoName);
+        step.userAddsANewTodo();
+        step.userCompletesTodo();
+        step.userChecksIfCompletedTaskIsNotOnActiveTab();
     }
 
     @Test
     public void completedTaskInOnCompletedFilter() {
-        var todoName = dataGenerator.business().creditCardType();
-        step.userAddsANewTodo(todoName);
-        step.userCompletesTodo(todoName);
-        step.userChecksIfCompletedTaskIsOnCompletedTab(todoName);
+        step.userAddsANewTodo();
+        step.userCompletesTodo();
+        step.userChecksIfCompletedTaskIsOnCompletedTab();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package org.example.steps;
 
+import com.github.javafaker.Faker;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.example.pageobjects.NewTodoInput;
@@ -24,6 +25,14 @@ public class UserSteps {
     @Steps
     TodoMVCApp app;
 
+    private String todoName;
+
+    private static Faker dataGenerator = new Faker();
+
+    @Step
+    public void userChecksIfCompletedTaskIsOnCompletedTab() {
+        userChecksIfCompletedTaskIsOnCompletedTab(this.todoName);
+    }
 
     @Step
     public void userChecksIfCompletedTaskIsOnCompletedTab(String todoName) {
@@ -32,14 +41,27 @@ public class UserSteps {
     }
 
     @Step
+    public void userChecksIfCompletedTaskIsNotOnActiveTab() {
+        userChecksIfCompletedTaskIsNotOnActiveTab(this.todoName);
+    }
+    @Step
     public void userChecksIfCompletedTaskIsNotOnActiveTab(String todoName) {
         filters.goToActiveTab();
         todosList.checkIfTodoIsNotListed(todoName);
     }
 
     @Step
+    public void userChecksIfTodoIsMarkedAsCompleted() {
+        userChecksIfTodoIsMarkedAsCompleted(this.todoName);
+    }
+    @Step
     public void userChecksIfTodoIsMarkedAsCompleted(String todoName) {
         todosList.checkIfTodoCompleted(todoName);
+    }
+
+    @Step
+    public void userCompletesTodo() {
+        userCompletesTodo(this.todoName);
     }
 
     @Step
@@ -48,8 +70,19 @@ public class UserSteps {
     }
 
     @Step
+    public void userChecksIfTodoIsCreated() {
+        userChecksIfTodoIsCreated(this.todoName);
+    }
+
+    @Step
     public void userChecksIfTodoIsCreated(String todoName) {
         todosList.checkIfTodoIsListed(todoName);
+    }
+
+    @Step
+    public void userAddsANewTodo() {
+        this.todoName = dataGenerator.dragonBall().character();
+        userAddsANewTodo(this.todoName);
     }
 
     @Step
