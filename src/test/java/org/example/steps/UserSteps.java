@@ -96,11 +96,6 @@ public class UserSteps {
     }
 
     @Step
-    public void userClosesTodoMVCApp() {
-        app.closeTodoMVC();
-    }
-
-    @Step
     public void userAddsTodos(List<String> todos) {
         for (String todo : todos) {
             userAddsANewTodo(todo);

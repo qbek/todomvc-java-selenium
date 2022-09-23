@@ -15,8 +15,9 @@ import org.openqa.selenium.WebDriver;
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
 
-    @Steps
+    @Steps(shared = true)
     protected UserSteps step;
+
 
     @Managed(driver = "chrome")
     WebDriver browser;

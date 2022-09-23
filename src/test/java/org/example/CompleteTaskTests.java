@@ -1,11 +1,16 @@
 package org.example;
 
 import com.github.javafaker.Faker;
+import net.thucydides.core.annotations.Steps;
+import org.example.steps.PreconditionSteps;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 public class CompleteTaskTests extends BaseSetup {
+
+    @Steps
+    PreconditionSteps preconditions;
 
     @Test
     public void userCanCompleteTheTodo() {
@@ -16,15 +21,13 @@ public class CompleteTaskTests extends BaseSetup {
 
     @Test
     public void completedTaskIsFilteredOutOnActiveFilter() {
-        step.userAddsANewTodo();
-        step.userCompletesTodo();
+        preconditions.userHasCompletedTask();
         step.userChecksIfCompletedTaskIsNotOnActiveTab();
     }
 
     @Test
     public void completedTaskInOnCompletedFilter() {
-        step.userAddsANewTodo();
-        step.userCompletesTodo();
+        preconditions.userHasCompletedTask();
         step.userChecksIfCompletedTaskIsOnCompletedTab();
     }
 
