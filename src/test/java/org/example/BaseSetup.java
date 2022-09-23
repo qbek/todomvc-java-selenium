@@ -9,17 +9,18 @@ import org.example.steps.UserSteps;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 
-
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
 
     @Steps(shared = true)
     protected UserSteps step;
 
-
-    @Managed(driver = "chrome")
+    @Managed
     WebDriver browser;
 
     protected static Faker dataGenerator = new Faker();
