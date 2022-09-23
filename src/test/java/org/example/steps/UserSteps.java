@@ -102,4 +102,7 @@ public class UserSteps {
         }
     }
 
+    public void waitUtilSTOPTodo() {
+        todosList.waitForSTOP();
+    }
 }
