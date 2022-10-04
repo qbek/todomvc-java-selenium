@@ -1,5 +1,6 @@
 package org.example.steps;
 
+import net.thucydides.core.annotations.Step;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -10,10 +11,12 @@ public class UserSteps {
 
     private WebDriver browser;
 
-    public UserSteps(WebDriver browser) {
+    public void setBrowser(WebDriver browser) {
         this.browser = browser;
     }
 
+
+    @Step
     public void userChecksIfCompletedTodoIsOnCompletedFilter(String name) {
         var completedFilter = browser.findElement(By.cssSelector("[href=\"#/completed\""));
         completedFilter.click();
@@ -23,6 +26,7 @@ public class UserSteps {
         MatcherAssert.assertThat("Todo is not on the list", todos, Matchers.equalTo(name));
     }
 
+    @Step
     public void userChecksIfCompletedTodoIsNotOnActiveFilter(String name) {
         var activeFilter = browser.findElement(By.cssSelector("[href=\"#/active\""));
         activeFilter.click();
@@ -32,6 +36,7 @@ public class UserSteps {
         MatcherAssert.assertThat("Todo is not on the list", todos, Matchers.emptyOrNullString());
     }
 
+    @Step
     public void userChecksItTodoIsMarkedAsCompleted() {
 //        var todoElement = browser.findElement(By.cssSelector(".todo-list > li"));
 //        var todoClasses = todoElement.getAttribute("class");
@@ -41,22 +46,25 @@ public class UserSteps {
         MatcherAssert.assertThat("Todo marked as completed is on the list", todoElements.size(), Matchers.equalTo(1));
     }
 
+    @Step
     public void userCompletesTodo() {
         var todoCompleteToggle = browser.findElement(By.cssSelector(".toggle"));
         todoCompleteToggle.click();
     }
 
-
+    @Step
     public void userChecksIfTodoWasCreated(String todoName) {
         var todosList = browser.findElement(By.cssSelector(".todo-list"));
         var todos = todosList.getText();
         MatcherAssert.assertThat("Todo has correct name", todos, Matchers.equalTo(todoName));
     }
 
+    @Step
     public void userOpenTodoMVC() {
         browser.get("https://todomvc.com/examples/jquery/#/all");
     }
 
+    @Step
     public void userCreatesANewTodo(String name) {
         var todoInput = browser.findElement(By.cssSelector(".new-todo"));
         todoInput.sendKeys(name);
