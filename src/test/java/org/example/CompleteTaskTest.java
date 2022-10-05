@@ -11,21 +11,19 @@ public class CompleteTaskTest extends BaseSetup {
         step.userCompletesTodo();
         step.userChecksItTodoIsMarkedAsCompleted();
     }
-//
-//    @Test
-//    public void userCanFilterActiveTodos() {
-//        var todoName = "To jest zadanie do zamknięcia";
-//        step.userCreatesANewTodo(todoName);
-//        step.userCompletesTodo();
-//        step.userChecksIfCompletedTodoIsNotOnActiveFilter(todoName);
-//    }
-//
-//    @Test
-//    public void userCanFilterCompletedTodos() {
-//        var todoName = "To jest zadanie do zamknięcia";
-//        step.userCreatesANewTodo(todoName);
-//        step.userCompletesTodo();
-//        step.userChecksIfCompletedTodoIsOnCompletedFilter(todoName);
-//    }
+
+    @Test
+    public void userCanFilterActiveTodos() {
+        var todoName = "To jest zadanie do zamknięcia";
+        step.userHasCompleteTodo(todoName);
+        step.userChecksIfCompletedTodoIsNotOnActiveFilter(todoName);
+    }
+
+    @Test
+    public void userCanFilterCompletedTodos() {
+        var todoName = "To jest zadanie do zamknięcia";
+        step.userHasCompleteTodo(todoName);
+        step.userChecksIfCompletedTodoIsOnCompletedFilter(todoName);
+    }
 
 }

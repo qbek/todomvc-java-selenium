@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.example.pageobjects.TodoInput;
 import org.example.pageobjects.TodoMVCapp;
+import org.example.pageobjects.TodosFilters;
 import org.example.pageobjects.TodosList;
 
 public class UserSteps {
@@ -17,32 +18,24 @@ public class UserSteps {
     @Steps
     TodoMVCapp todoMvc;
 
+    @Steps
+    TodosFilters todosFilters;
 
-//    @Step
-//    public void userChecksIfCompletedTodoIsOnCompletedFilter(String name) {
-//        var completedFilter = browser.findElement(By.cssSelector("[href=\"#/completed\""));
-//        completedFilter.click();
-//
-//        var todosList = browser.findElement(By.cssSelector(".todo-list"));
-//        var todos = todosList.getText();
-//        MatcherAssert.assertThat("Todo is not on the list", todos, Matchers.equalTo(name));
-//    }
-//
-//    @Step
-//    public void userChecksIfCompletedTodoIsNotOnActiveFilter(String name) {
-//        var activeFilter = browser.findElement(By.cssSelector("[href=\"#/active\""));
-//        activeFilter.click();
-//
-//        var todosList = browser.findElement(By.cssSelector(".todo-list"));
-//        var todos = todosList.getText();
-//        MatcherAssert.assertThat("Todo is not on the list", todos, Matchers.emptyOrNullString());
-//    }
-//
+    @Step
+    public void userChecksIfCompletedTodoIsOnCompletedFilter(String name) {
+        todosFilters.switchToCompleteTab();
+        todosList.checkIfTodoIsDisplayed(name);
+    }
+
+    @Step("User checks if completed task is filtered out on Active tab")
+    public void userChecksIfCompletedTodoIsNotOnActiveFilter(String name) {
+        todosFilters.switchToActiveTab();
+        todosList.checkIfTodoIsNOTDisplayed(name);
+    }
+
     @Step
     public void userChecksItTodoIsMarkedAsCompleted() {
-
         todosList.checkIfTodoMarkedAsCompleted();
-
     }
 
     @Step
@@ -50,18 +43,24 @@ public class UserSteps {
         todosList.completeTodo();
     }
 
-    @Step
+    @Step("User checks it todo was created")
     public void userChecksIfTodoWasCreated(String todoName) {
         todosList.checkIfTodoIsDisplayed(todoName);
     }
 
-    @Step
     public void userOpenTodoMVC() {
         todoMvc.openApp();
     }
 
-    @Step
+    @Step("User creates a new todo")
     public void userCreatesANewTodo(String name) {
         todoInput.addTodo(name);
+    }
+
+    @Step("User has completed todo")
+    public void userHasCompleteTodo(String name) {
+        userCreatesANewTodo(name);
+        userChecksIfTodoWasCreated(name);
+        userCompletesTodo();
     }
 }
