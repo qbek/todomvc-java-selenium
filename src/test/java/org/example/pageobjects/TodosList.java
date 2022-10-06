@@ -20,11 +20,6 @@ public class TodosList extends PageObject {
     }
 
     @Step
-    public void completeTodo() {
-        find(COMPLETE_TOGGLE).click();
-    }
-
-    @Step
     public void completeTodo(String name) {
         findTodoByName(name).find(COMPLETE_TOGGLE).click();
     }

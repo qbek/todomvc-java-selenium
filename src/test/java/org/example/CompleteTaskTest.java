@@ -6,24 +6,21 @@ public class CompleteTaskTest extends BaseSetup {
 
     @Test
     public void userCanCompleteTodo() throws InterruptedException {
-        var todoName = dataGenerator.chuckNorris().fact();
-        step.userCreatesANewTodo(todoName);
+        step.userCreatesANewTodo();
         step.userCompletesTodo();
         step.userChecksItTodoIsMarkedAsCompleted();
     }
 
     @Test
     public void userCanFilterActiveTodos() {
-        var todoName = dataGenerator.programmingLanguage().creator();
-        step.userHasCompletedTodo(todoName);
-        step.userChecksIfCompletedTodoIsNotOnActiveFilter(todoName);
+        step.userHasCompletedTodo();
+        step.userChecksIfCompletedTodoIsNotOnActiveFilter();
     }
 
     @Test
     public void userCanFilterCompletedTodos() {
-        var todoName = dataGenerator.backToTheFuture().quote();
-        step.userHasCompletedTodo(todoName);
-        step.userChecksIfCompletedTodoIsOnCompletedFilter(todoName);
+        step.userHasCompletedTodo();
+        step.userChecksIfCompletedTodoIsOnCompletedFilter();
     }
 
     @Test
@@ -34,7 +31,6 @@ public class CompleteTaskTest extends BaseSetup {
         fewTodos = dataGenerator.lorem().sentences(dataGenerator.number().numberBetween(0, 4));
         step.userAddsFewTodos(fewTodos);
         step.userCompletesTheOne();
-        Thread.sleep(1000);
     }
 
 }
