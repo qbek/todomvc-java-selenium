@@ -5,6 +5,8 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
+import java.util.NoSuchElementException;
+
 public class TodosList extends PageObject {
 
     private final By TODOS_LIST = By.cssSelector(".todo-list");
@@ -28,13 +30,20 @@ public class TodosList extends PageObject {
     }
 
     private WebElementFacade findTodoByName(String name) {
-        var allTodos = findAll(TODO_ELEMENT);
-        for (var todo : allTodos) {
-            if (todo.getText().equals(name)) {
-                return todo;
-            }
+        //JAVA 7-
+//        var allTodos = findAll(TODO_ELEMENT);
+//        for (var todo : allTodos) {
+//            if (todo.getText().equals(name)) {
+//                return todo;
+//            }
+//        }
+        try {
+            return findEach(TODO_ELEMENT)
+                    .filter(todo -> todo.containsOnlyText(name))
+                    .findFirst().get();
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Todo element: " + name + " not found.");
         }
-        throw new AssertionError("Todo element: " + name + " not found.");
     }
 
     @Step
