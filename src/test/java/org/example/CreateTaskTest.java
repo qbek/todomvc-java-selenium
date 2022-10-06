@@ -6,7 +6,7 @@ public class CreateTaskTest extends BaseSetup {
 
     @Test
     public void userCanCreateATodo() {
-        var todoName = "To jest moje fajniejsze zadanie";
+        var todoName = dataGenerator.witcher().monster();
         step.userCreatesANewTodo(todoName);
         step.userChecksIfTodoWasCreated(todoName);
     }

@@ -1,6 +1,7 @@
 package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
@@ -8,6 +9,7 @@ public class TodosList extends PageObject {
 
     private final By TODOS_LIST = By.cssSelector(".todo-list");
     private final By COMPLETE_TOGGLE = By.cssSelector(".toggle");
+    private final By TODO_ELEMENT = By.cssSelector(".todo-list > li");
     private final By TODO_COMPLETED = By.cssSelector(".todo-list > .completed");
 
     @Step
@@ -21,6 +23,21 @@ public class TodosList extends PageObject {
     }
 
     @Step
+    public void completeTodo(String name) {
+        findTodoByName(name).find(COMPLETE_TOGGLE).click();
+    }
+
+    private WebElementFacade findTodoByName(String name) {
+        var allTodos = findAll(TODO_ELEMENT);
+        for (var todo : allTodos) {
+            if (todo.getText().equals(name)) {
+                return todo;
+            }
+        }
+        throw new AssertionError("Todo element: " + name + " not found.");
+    }
+
+    @Step
     public void checkIfTodoMarkedAsCompleted() {
         find(TODO_COMPLETED).shouldBePresent();
     }
@@ -29,4 +46,6 @@ public class TodosList extends PageObject {
     public void checkIfTodoIsNOTDisplayed(String name) {
         find(TODOS_LIST).shouldNotContainText(name);
     }
+
+
 }

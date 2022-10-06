@@ -7,6 +7,8 @@ import org.example.pageobjects.TodoMVCapp;
 import org.example.pageobjects.TodosFilters;
 import org.example.pageobjects.TodosList;
 
+import java.util.List;
+
 public class UserSteps {
 
     @Steps
@@ -58,9 +60,19 @@ public class UserSteps {
     }
 
     @Step("User has completed todo")
-    public void userHasCompleteTodo(String name) {
+    public void userHasCompletedTodo(String name) {
         userCreatesANewTodo(name);
         userChecksIfTodoWasCreated(name);
         userCompletesTodo();
+    }
+
+    public void userAddsFewTodos(List<String> fewTodos) {
+        for (String todo : fewTodos) {
+            userCreatesANewTodo(todo);
+        }
+    }
+
+    public void userCompletesTheOne() {
+        todosList.completeTodo("THE ONE");
     }
 }

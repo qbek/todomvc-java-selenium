@@ -1,5 +1,6 @@
 package org.example;
 
+import com.github.javafaker.Faker;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -17,6 +18,8 @@ public class BaseSetup {
 
     @Steps
     UserSteps step;
+
+    Faker dataGenerator = new Faker();
 
     @BeforeEach
     public void setup() {
