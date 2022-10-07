@@ -12,4 +12,8 @@ public class TodoInput extends PageObject {
     public void addTodo(String name) {
         find(TODO_INPUT).typeAndEnter(name);
     }
+
+    public void waitUntilVisible() {
+        find(TODO_INPUT).waitUntilVisible();
+    }
 }

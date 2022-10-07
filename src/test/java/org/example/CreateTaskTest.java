@@ -9,5 +9,10 @@ public class CreateTaskTest extends BaseSetup {
         step.userCreatesANewTodo();
         step.userChecksIfTodoWasCreated();
     }
+
+    @Test
+    public void userWaitsForSTOPtodo() {
+        step.userWaitsForStopTodo();
+    }
 }
 

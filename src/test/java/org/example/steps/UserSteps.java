@@ -57,6 +57,7 @@ public class UserSteps {
 
     public void userOpenTodoMVC() {
         todoMvc.openApp();
+        todoInput.waitUntilVisible();
     }
 
     @Step("User creates a new todo")
@@ -84,5 +85,9 @@ public class UserSteps {
 
     public void userCompletesTheOne() {
         todosList.completeTodo("THE ONE");
+    }
+
+    public void userWaitsForStopTodo() {
+        todosList.waitForTodo("STOP");
     }
 }
