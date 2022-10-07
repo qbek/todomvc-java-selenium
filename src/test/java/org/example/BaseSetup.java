@@ -8,12 +8,15 @@ import org.example.steps.UserSteps;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(SerenityJUnit5Extension.class)
 public class BaseSetup {
 
-    @Managed(driver = "firefox")
+    @Managed
     WebDriver browser;
 
     @Steps
