@@ -13,6 +13,11 @@ public class TaskCreationTest {
 
     By todoInputSelector = By.cssSelector(".new-todo");
     By todoListSelector = By.cssSelector(".todo-list");
+    By todoItemSelector = By.cssSelector(".todo-list li");
+    By completeButtonSelector = By.cssSelector(".toggle");
+
+    By completeTabSelector = By.cssSelector("[href=\"#/completed\"]");
+    By activeTabSelector = By.cssSelector("[href=\"#/active\"]");
 
     WebDriver browser = new FirefoxDriver();
 
@@ -20,6 +25,7 @@ public class TaskCreationTest {
     public void setup() {
         userOpensTodoMVCApp();
     }
+
 
     @AfterEach
     public void cleanup() {
@@ -33,12 +39,50 @@ public class TaskCreationTest {
         userChecksIfTodoIsOnTheList(taskName);
     }
 
+    @Test
+    public void useCanCompleteATask() {
+        String taskName = "Zadanie do zakończenia";
+        userCreatesNewTask(taskName);
+        userCompletesTheTask();
+        userChecksIfTaskIsMarkedAsCompleted();
+        userChecksIfTaskInNOTOnActiveTab(taskName);
+        userChecksIfTaskIsOnCompletedTab(taskName);
+    }
 
+    private void userChecksIfTaskIsOnCompletedTab(String taskName) {
+        WebElement completeTab = browser.findElement(completeTabSelector);
+        completeTab.click();
+
+        WebElement todoList = browser.findElement(todoListSelector);
+        MatcherAssert.assertThat("Todo should be on the list", todoList.getText(), Matchers.equalTo(taskName));
+    }
+
+    private void userChecksIfTaskInNOTOnActiveTab(String taskName) {
+
+        WebElement activeTab = browser.findElement(activeTabSelector);
+        activeTab.click();
+
+        WebElement todoList = browser.findElement(todoListSelector);
+        MatcherAssert.assertThat("Task should not be on the Active list", todoList.getText(), Matchers.not(Matchers.containsString(taskName)));
+    }
+
+    private void userChecksIfTaskIsMarkedAsCompleted() {
+
+        WebElement taskItem = browser.findElement(todoItemSelector);
+        String taskClasses = taskItem.getAttribute("class");
+        MatcherAssert.assertThat("Task should be marked as completed", taskClasses, Matchers.equalTo("completed"));
+    }
+
+    private void userCompletesTheTask() {
+
+        WebElement completedButton = browser.findElement(completeButtonSelector);
+        completedButton.click();
+    }
 
     private void userChecksIfTodoIsOnTheList(String taskName) {
         WebElement todosList = browser.findElement(todoListSelector);
         String todos = todosList.getText();
-        MatcherAssert.assertThat("Todo should be on the list", todos, Matchers.equalTo("test"));
+        MatcherAssert.assertThat("Todo should be on the list", todos, Matchers.equalTo(taskName));
     }
 
     private void userCreatesNewTask(String taskName) {
