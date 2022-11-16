@@ -94,8 +94,5 @@ public class HelloWorld {
 
         WebElement selectEl = browser.findElement(By.cssSelector("#mojselekct"));
 
-        Select select = new Select(selectEl);
-        select.selectByIndex();
-
     }
 }
