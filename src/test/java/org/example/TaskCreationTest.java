@@ -18,7 +18,7 @@ public class TaskCreationTest {
 
     @BeforeEach
     public void setup() {
-        browser.get("https://todomvc.com/examples/jquery/#/all");
+        userOpensTodoMVCApp();
     }
 
     @AfterEach
@@ -29,17 +29,25 @@ public class TaskCreationTest {
     @Test
     public void userCanCreateATask() {
         String taskName = "To jest zadanie";
-
-        WebElement newTodoInput = browser.findElement(todoInputSelector);
-
-        newTodoInput.sendKeys(taskName);
-        newTodoInput.sendKeys(Keys.ENTER);
-
-        WebElement todosList = browser.findElement(todoListSelector);
-        String todos = todosList.getText();
-
-        MatcherAssert.assertThat("Todo should be on the list", todos, Matchers.equalTo("test"));
+        userCreatesNewTask(taskName);
+        userChecksIfTodoIsOnTheList(taskName);
     }
 
 
+
+    private void userChecksIfTodoIsOnTheList(String taskName) {
+        WebElement todosList = browser.findElement(todoListSelector);
+        String todos = todosList.getText();
+        MatcherAssert.assertThat("Todo should be on the list", todos, Matchers.equalTo("test"));
+    }
+
+    private void userCreatesNewTask(String taskName) {
+        WebElement newTodoInput = browser.findElement(todoInputSelector);
+        newTodoInput.sendKeys(taskName);
+        newTodoInput.sendKeys(Keys.ENTER);
+    }
+
+    private void userOpensTodoMVCApp() {
+        browser.get("https://todomvc.com/examples/jquery/#/all");
+    }
 }
