@@ -1,6 +1,5 @@
 package org.example.pageobjects;
 
-import net.serenitybdd.core.pages.ListOfWebElementFacades;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
@@ -58,12 +57,18 @@ public class TodosList extends PageObject {
     }
 
     private WebElementFacade findTodoByName(String name) {
-        ListOfWebElementFacades allTodos = findAll(todo);
-        for (WebElementFacade todo : allTodos) {
-            if (todo.containsText(name)) {
-                return todo;
-            }
+        //JAVA 7-
+//        ListOfWebElementFacades allTodos = findAll(todo);
+//        for (WebElementFacade todo : allTodos) {
+//            if (todo.containsText(name)) {
+//                return todo;
+//            }
+//        }
+//        throw new AssertionError("Todo was not found");
+        try {
+            return findEach(todo).filter(todo -> todo.containsOnlyText(name)).findFirst().get();
+        } catch (Exception e) {
+            throw new AssertionError(String.format("Todo element %s not found", name));
         }
-        throw new AssertionError("Todo was not found");
     };
 }
