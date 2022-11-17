@@ -9,6 +9,7 @@ import org.example.pageobjects.TodoMvcApp;
 import org.example.pageobjects.TodosList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class UserSteps {
 
@@ -74,5 +75,25 @@ public class UserSteps {
     @Step
     public void userDeletesTask() {
         todosList.deleteTask();
+    }
+
+    @Step
+    public void userCreatesFewTodos() {
+        List<String> tasks = generator.lorem().sentences(
+                generator.number().numberBetween(0, 4)
+        );
+        for (String task : tasks) {
+            newTodoInput.createTask(task);
+        }
+    }
+
+    @Step
+    public void userCreateTheOne() {
+        newTodoInput.createTask("THE ONE!!!");
+    }
+
+    @Step
+    public void userDeletesTheOne() {
+        todosList.deleteTask("THE ONE!!!");
     }
 }

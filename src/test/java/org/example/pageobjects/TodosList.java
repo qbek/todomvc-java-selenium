@@ -1,6 +1,8 @@
 package org.example.pageobjects;
 
+import net.serenitybdd.core.pages.ListOfWebElementFacades;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
@@ -43,4 +45,25 @@ public class TodosList extends PageObject {
                 .click(find(deleteButton))
                 .perform();
     }
+
+    @Step
+    public void deleteTask(String name) {
+        WebElementFacade todoToDelete = findTodoByName(name);
+        WebElementFacade destroy = todoToDelete.find(By.cssSelector(".destroy"));
+
+        new Actions(getDriver())
+                .moveToElement(todoToDelete)
+                .click(destroy)
+                .perform();
+    }
+
+    private WebElementFacade findTodoByName(String name) {
+        ListOfWebElementFacades allTodos = findAll(todo);
+        for (WebElementFacade todo : allTodos) {
+            if (todo.containsText(name)) {
+                return todo;
+            }
+        }
+        throw new AssertionError("Todo was not found");
+    };
 }
