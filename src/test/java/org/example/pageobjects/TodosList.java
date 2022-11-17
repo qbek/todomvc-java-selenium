@@ -1,6 +1,7 @@
 package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.annotations.Step;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -13,21 +14,25 @@ public class TodosList extends PageObject {
     By completeButtonSelector = By.cssSelector(".todo-list li .toggle");
 
 
+    @Step
     public void completeTodo() {
         WebElement completedButton = getDriver().findElement(completeButtonSelector);
         completedButton.click();
     }
 
+    @Step
     public void checkIfTodoDisplayed(String name) {
         WebElement todosList = getDriver().findElement(todoListSelector);
         MatcherAssert.assertThat("Todo should be on the list", todosList.getText(), Matchers.equalTo(name));
     }
 
+    @Step
     public void checkIfTodoNOTDisplayed(String name) {
         WebElement todoList = getDriver().findElement(todoListSelector);
-        MatcherAssert.assertThat("Task should not be on the Active list", todoList.getText(), Matchers.not(Matchers.containsString(name)));
+        MatcherAssert.assertThat("Task should not be on the Active list", todoList.getText(), Matchers.containsString(name));
     }
 
+    @Step
     public void checkIfTodoMarkedAsCompleted() {
         WebElement taskItem = getDriver().findElement(todoItemSelector);
         String taskClasses = taskItem.getAttribute("class");
