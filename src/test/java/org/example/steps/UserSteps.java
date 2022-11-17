@@ -1,5 +1,6 @@
 package org.example.steps;
 
+import com.github.javafaker.Faker;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.example.pageobjects.NewTodo;
@@ -7,7 +8,13 @@ import org.example.pageobjects.TodoFilters;
 import org.example.pageobjects.TodoMvcApp;
 import org.example.pageobjects.TodosList;
 
+import java.io.IOException;
+
 public class UserSteps {
+
+    private String taskName;
+
+    private Faker generator = new Faker();
 
     @Steps
     NewTodo newTodoInput;
@@ -22,25 +29,26 @@ public class UserSteps {
     TodoMvcApp app;
 
     @Step
-    public void userChecksIfTodoIsOnTheList(String taskName) {
-        todosList.checkIfTodoDisplayed(taskName);
+    public void userChecksIfTodoIsOnTheList() {
+        todosList.checkIfTodoDisplayed(this.taskName);
     }
 
     @Step
-    public void userCreatesNewTask(String taskName) {
-        newTodoInput.createTask(taskName);
+    public void userCreatesNewTask() {
+        this.taskName = generator.funnyName().name();
+        newTodoInput.createTask(this.taskName);
     }
 
     @Step
-    public void userChecksIfTaskIsOnCompletedTab(String taskName) {
+    public void userChecksIfTaskIsOnCompletedTab() {
         todoFilters.switchToCompleted();
-        todosList.checkIfTodoDisplayed(taskName);
+        todosList.checkIfTodoDisplayed(this.taskName);
     }
 
     @Step
-    public void userChecksIfTaskInNOTOnActiveTab(String taskName) {
+    public void userChecksIfTaskInNOTOnActiveTab() {
         todoFilters.switchToActive();
-        todosList.checkIfTodoNOTDisplayed(taskName);
+        todosList.checkIfTodoNOTDisplayed(this.taskName);
     }
 
     @Step
@@ -54,7 +62,17 @@ public class UserSteps {
     }
 
     @Step
-    public void userOpensTodoMVCApp() {
+    public void userOpensTodoMVCApp() throws IOException {
         app.openTodoMVC();
+    }
+
+    @Step
+    public void userChecksIfTodoIsNotOnTheList() {
+        todosList.checkIfTodoNOTDisplayed(this.taskName);
+    }
+
+    @Step
+    public void userDeletesTask() {
+        todosList.deleteTask();
     }
 }

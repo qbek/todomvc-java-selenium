@@ -1,5 +1,6 @@
 package org.example;
 
+import com.github.javafaker.Faker;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class HelloWorld {
 
@@ -91,8 +91,12 @@ public class HelloWorld {
         String href = rmffmLink.getAttribute("href");
         MatcherAssert.assertThat("Link is correct", href, Matchers.equalTo("http://rmf.fm"));
 
-
         WebElement selectEl = browser.findElement(By.cssSelector("#mojselekct"));
+    }
 
+    @Test
+    public void faker() {
+        Faker generator = new Faker();
+        System.out.println(generator.numerify("1234##4321##"));
     }
 }

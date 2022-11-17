@@ -6,28 +6,22 @@ public class TaskCompletionTest extends BaseSetup {
 
     @Test
     public void userCanCompleteATask() {
-        String taskName = "Zadanie do zakończenia";
-        steps.userCreatesNewTask(taskName);
+        steps.userCreatesNewTask();
         steps.userCompletesTheTask();
         steps.userChecksIfTaskIsMarkedAsCompleted();
     }
 
     @Test
     public void userCannotSeeCompletedTaskOnActiveTab() {
-        String taskName = "Zadanie do zakończenia";
-        steps.userCreatesNewTask(taskName);
+        steps.userCreatesNewTask();
         steps.userCompletesTheTask();
-        steps.userChecksIfTaskInNOTOnActiveTab(taskName);
+        steps.userChecksIfTaskInNOTOnActiveTab();
     }
 
     @Test
     public void userSeesCompletedTaskOnCompletedTab() {
-        String taskName = "Zadanie do zakończenia";
-        steps.userCreatesNewTask(taskName);
+        steps.userCreatesNewTask();
         steps.userCompletesTheTask();
-        steps.userChecksIfTaskIsOnCompletedTab(taskName);
+        steps.userChecksIfTaskIsOnCompletedTab();
     }
-
-
-
 }

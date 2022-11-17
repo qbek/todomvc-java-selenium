@@ -6,9 +6,8 @@ public class TaskCreationTest  extends BaseSetup {
 
     @Test
     public void userCanCreateATask() {
-        String taskName = "To jest zadanie";
-        steps.userCreatesNewTask(taskName);
-        steps.userChecksIfTodoIsOnTheList(taskName);
+        steps.userCreatesNewTask();
+        steps.userChecksIfTodoIsOnTheList();
     }
 
 }

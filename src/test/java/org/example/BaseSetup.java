@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
     @Managed(driver = "firefox")
@@ -17,8 +19,9 @@ public abstract class BaseSetup {
     @Steps
     UserSteps steps;
 
+
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         steps.userOpensTodoMVCApp();
     }
 
