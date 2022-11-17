@@ -9,7 +9,6 @@ import org.example.pageobjects.TodoMvcApp;
 import org.example.pageobjects.TodosList;
 
 import java.io.IOException;
-import java.util.List;
 
 public class UserSteps {
 
@@ -79,7 +78,7 @@ public class UserSteps {
 
     @Step
     public void userCreatesFewTodos() {
-        List<String> tasks = generator.lorem().sentences(
+        var tasks = generator.lorem().sentences(
                 generator.number().numberBetween(0, 4)
         );
         for (String task : tasks) {

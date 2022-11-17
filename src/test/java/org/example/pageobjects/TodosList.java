@@ -47,8 +47,8 @@ public class TodosList extends PageObject {
 
     @Step
     public void deleteTask(String name) {
-        WebElementFacade todoToDelete = findTodoByName(name);
-        WebElementFacade destroy = todoToDelete.find(By.cssSelector(".destroy"));
+        var todoToDelete = findTodoByName(name);
+        var destroy = todoToDelete.find(By.cssSelector(".destroy"));
 
         new Actions(getDriver())
                 .moveToElement(todoToDelete)
