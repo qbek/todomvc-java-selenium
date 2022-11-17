@@ -19,7 +19,6 @@ public abstract class BaseSetup {
 
     @BeforeEach
     public void setup() {
-        steps.setDriver(browser);
         steps.userOpensTodoMVCApp();
     }
 
