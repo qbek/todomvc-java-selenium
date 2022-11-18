@@ -6,22 +6,22 @@ public class TaskCompletionTest extends BaseSetup {
 
     @Test
     public void userCanCompleteATask() {
-        steps.userCreatesNewTask();
-        steps.userCompletesTheTask();
-        steps.userChecksIfTaskIsMarkedAsCompleted();
+        given.hasCreatedTodo();
+        when.userCompletesTheTask();
+        then.userChecksIfTaskIsMarkedAsCompleted();
     }
 
     @Test
     public void userCannotSeeCompletedTaskOnActiveTab() {
-        steps.userCreatesNewTask();
-        steps.userCompletesTheTask();
-        steps.userChecksIfTaskInNOTOnActiveTab();
+        given.userHasCompletedTask();
+        when.userSwitchesToActiveTab();
+        then.userChecksIfTaskIsNOTDisplayed();
     }
 
     @Test
     public void userSeesCompletedTaskOnCompletedTab() {
-        steps.userCreatesNewTask();
-        steps.userCompletesTheTask();
-        steps.userChecksIfTaskIsOnCompletedTab();
+        given.userHasCompletedTask();
+        when.userSwitchesToCompletedTab();
+        then.userChecksIfTodoIsOnTheList();
     }
 }

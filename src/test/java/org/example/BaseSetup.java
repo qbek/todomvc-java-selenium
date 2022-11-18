@@ -3,7 +3,9 @@ package org.example;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
-import org.example.steps.UserSteps;
+import org.example.steps.PreconditionSteps;
+import org.example.steps.UserActionSteps;
+import org.example.steps.UserVerificationSteps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -16,15 +18,21 @@ public abstract class BaseSetup {
     @Managed(driver = "firefox")
     WebDriver browser;
 
-    @Steps(actor = "Fluffy Rabbit")
-    UserSteps steps;
+    @Steps
+    PreconditionSteps given;
+
+    @Steps
+    UserActionSteps when;
+
+    @Steps
+    UserVerificationSteps then;
 
     @BeforeEach
     public void setup() throws IOException {
         if (Objects.isNull(System.getProperty("td"))) {
             throw new RuntimeException("Missing td parameter in execution command");
         }
-        steps.userOpensTodoMVCApp();
+        when.userOpensTodoMVCApp();
     }
 
 }

@@ -6,7 +6,7 @@ public class AwaitilityExample extends BaseSetup {
 
     @Test
     public void userWaitsForTheOne() {
-        steps.userWaitForTheOne();
-        steps.userChecksIfTodoIsOnTheList("THE ONE");
+        when.userWaitForTheOne();
+        then.userChecksIfTodoIsOnTheList("THE ONE");
     }
 }

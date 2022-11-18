@@ -6,8 +6,8 @@ public class TaskCreationTest  extends BaseSetup {
 
     @Test
     public void userCanCreateATask() {
-        steps.userCreatesNewTask();
-        steps.userChecksIfTodoIsOnTheList();
+        when.userCreatesNewTask();
+        then.userChecksIfTodoIsOnTheList();
     }
 
 }

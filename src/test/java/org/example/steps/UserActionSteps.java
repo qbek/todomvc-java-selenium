@@ -3,6 +3,7 @@ package org.example.steps;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
+import org.example.data.TestData;
 import org.example.data.TestDataManager;
 import org.example.pageobjects.NewTodo;
 import org.example.pageobjects.TodoFilters;
@@ -11,10 +12,12 @@ import org.example.pageobjects.TodosList;
 
 import java.io.IOException;
 
-public class UserSteps {
+public class UserActionSteps {
 
-    private String taskName;
     private String actor;
+
+    @Steps(shared = true)
+    TestData testData;
 
     @Steps
     NewTodo newTodoInput;
@@ -30,53 +33,26 @@ public class UserSteps {
 
     TestDataManager dataManager = new TestDataManager();
 
-    @Step("#actor checks is on the todos list")
-    public void userChecksIfTodoIsOnTheList() {
-        todosList.checkIfTodoDisplayed(this.taskName);
-    }
-
-
 
     @Step("#actor create a new task")
     public void userCreatesNewTask() {
-        this.taskName = dataManager.generateTaskName();
-        newTodoInput.createTask(this.taskName);
+        testData.setTaskName(dataManager.generateTaskName());
+        newTodoInput.createTask(testData.getTaskName());
     }
 
-    @Step
-    public void userChecksIfTaskIsOnCompletedTab() {
-        todoFilters.switchToCompleted();
-        todosList.checkIfTodoDisplayed(this.taskName);
-    }
-
-    @Step
-    public void userChecksIfTaskInNOTOnActiveTab() {
-        todoFilters.switchToActive();
-        todosList.checkIfTodoNOTDisplayed(this.taskName);
-    }
-
-    @Step
-    public void userChecksIfTaskIsMarkedAsCompleted() {
-        todosList.checkIfTodoMarkedAsCompleted();
-    }
 
     @Step
     public void userCompletesTheTask() {
         todosList.completeTodo();
     }
 
-    @Step
     public void userOpensTodoMVCApp() throws IOException {
         app.openTodoMVC();
     }
 
-    @Step
-    public void userChecksIfTodoIsNotOnTheList() {
-        todosList.checkIfTodoNOTDisplayed(this.taskName);
-    }
 
     @Step
-    public void userDeletesTask() {
+    public void userDeletesTodo() {
         todosList.deleteTask();
     }
 
@@ -99,13 +75,19 @@ public class UserSteps {
         todosList.deleteTask("THE ONE!!!");
     }
 
-    @Step
-    public void userChecksIfTodoIsOnTheList(String the_one) {
-        todosList.checkIfTodoDisplayed("THE ONE");
-    }
 
     @Step
     public void userWaitForTheOne() {
         todosList.waitForTask("THE ONE");
+    }
+
+    @Step
+    public void userSwitchesToActiveTab() {
+        todoFilters.switchToActive();
+    }
+
+    @Step
+    public void userSwitchesToCompletedTab() {
+        todoFilters.switchToCompleted();
     }
 }
