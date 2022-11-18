@@ -13,9 +13,10 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 import java.util.Objects;
 
+
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
-    @Managed(driver = "firefox")
+    @Managed
     WebDriver browser;
 
     @Steps
