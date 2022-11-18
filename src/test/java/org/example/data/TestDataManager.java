@@ -1,36 +1,28 @@
 package org.example.data;
 
-import com.github.javafaker.Faker;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataManager {
 
-    private Faker generator = new Faker();
-
     private String dataType = System.getProperty("td");
+    private RandomDataProvider randomData = new RandomDataProvider();
+    private StaticDataProvider staticData = new StaticDataProvider();
 
     public String generateTaskName() {
         if (dataType.equals("random")) {
-            return generator.funnyName().name();
+            return randomData.provideTaskName();
         } else if (dataType.equals("static")) {
-            return "Zadanie ze statyczną nazwą";
+            return staticData.provideTaskName();
         }
-        throw new RuntimeException("Missing td parameter in execution command");
+        throw new RuntimeException("Invalid td parameter in execution command");
     }
 
     public List<String> generateFewTasksName() {
         if (dataType.equals("random")) {
-            return generator.lorem().sentences(
-                    generator.number().numberBetween(0, 4)
-            );
+            return randomData.provideFewTasksName();
         } else if (dataType.equals("static")) {
-            List<String> names = new ArrayList<>();
-            names.add("Pierwsze zadanie");
-            names.add("Drugie zadanie");
-            return names;
+            return staticData.provideFewTasksName();
         }
-        throw new RuntimeException("Missing td parameter in execution command");
+        throw new RuntimeException("Invalid td parameter in execution command");
     }
 }
