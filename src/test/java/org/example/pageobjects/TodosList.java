@@ -3,8 +3,13 @@ package org.example.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+import org.awaitility.Awaitility;
+import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 public class TodosList extends PageObject {
 
@@ -72,6 +77,29 @@ public class TodosList extends PageObject {
         }
     };
 
-    public void waitForTask(String the_one) {
+
+    @Step
+    public void waitForTask(String name) {
+        try {
+            Awaitility.await().pollInSameThread().atMost(10, TimeUnit.SECONDS).pollInterval(1, TimeUnit.SECONDS)
+                    .until(new WaitUtilTaskExists(name));
+        } catch (ConditionTimeoutException e) {
+            throw new AssertionError("THE ONE was not found after 10 seconds");
+        }
+    }
+
+    private class WaitUtilTaskExists implements Callable<Boolean> {
+
+        private String name;
+
+        public WaitUtilTaskExists(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+            System.out.println("Sprawdzam....");
+            return find(todoList).containsText(name);
+        }
     }
 }

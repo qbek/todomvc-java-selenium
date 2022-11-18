@@ -107,6 +107,7 @@ public class UserSteps {
         todosList.checkIfTodoDisplayed("THE ONE");
     }
 
+    @Step
     public void userWaitForTheOne() {
         todosList.waitForTask("THE ONE");
     }
