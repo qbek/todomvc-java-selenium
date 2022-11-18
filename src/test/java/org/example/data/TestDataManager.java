@@ -1,12 +1,20 @@
 package org.example.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataManager {
 
     private String dataType = System.getProperty("td");
-    private IDataProvider randomData = new RandomDataProvider();
-    private IDataProvider staticData = new StaticDataProvider();
+
+    private static List<IDataProvider> dataProviders;
+
+    static {
+        dataProviders = new ArrayList<>();
+        dataProviders.add(new RandomDataProvider());
+        dataProviders.add(new StaticDataProvider());
+    }
+
 
     public String generateTaskName() {
         return selectDataProvider().provideTaskName();
@@ -17,11 +25,10 @@ public class TestDataManager {
     }
 
     private IDataProvider selectDataProvider() {
-        if (dataType.equals("random")) {
-            return randomData;
-        } else if (dataType.equals("static")) {
-            return staticData;
+        try {
+            return dataProviders.stream().filter(dp -> dp.isDataProviderType(dataType)).findFirst().get();
+        } catch (Exception e) {
+            throw new RuntimeException("Requested provider doesn't exist");
         }
-        throw new RuntimeException("Invalid td parameter in execution command");
     }
 }

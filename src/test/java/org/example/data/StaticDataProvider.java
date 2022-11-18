@@ -17,4 +17,9 @@ public class StaticDataProvider implements IDataProvider {
         names.add("Drugie zadanie");
         return names;
     }
+
+    @Override
+    public boolean isDataProviderType(String type) {
+        return type.equals("static");
+    }
 }

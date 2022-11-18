@@ -29,6 +29,7 @@
                         <configuration>
                             <systemPropertyVariables>
                                 <env>jquery</env>
+                                <td>random</td>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

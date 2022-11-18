@@ -7,4 +7,6 @@ public interface IDataProvider {
     String provideTaskName();
 
     List<String> provideFewTasksName();
+
+    boolean isDataProviderType(String type);
 }

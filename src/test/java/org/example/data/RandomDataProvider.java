@@ -19,4 +19,9 @@ public class RandomDataProvider implements IDataProvider {
                 generator.number().numberBetween(0, 4)
         );
     }
+
+    @Override
+    public boolean isDataProviderType(String type) {
+        return type.equals("random");
+    }
 }
