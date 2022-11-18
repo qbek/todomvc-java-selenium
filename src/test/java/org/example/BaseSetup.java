@@ -4,7 +4,6 @@ import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import org.example.steps.UserSteps;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -24,10 +23,5 @@ public abstract class BaseSetup {
     public void setup() throws IOException {
         steps.userOpensTodoMVCApp();
     }
-
-
-    @AfterEach
-    public void cleanup() {
-        browser.close();
-    }
+    
 }
