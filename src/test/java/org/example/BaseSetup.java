@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
@@ -20,6 +21,9 @@ public abstract class BaseSetup {
 
     @BeforeEach
     public void setup() throws IOException {
+        if (Objects.isNull(System.getProperty("td"))) {
+            throw new RuntimeException("Missing td parameter in execution command");
+        }
         steps.userOpensTodoMVCApp();
     }
 

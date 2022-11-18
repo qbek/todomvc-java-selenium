@@ -5,23 +5,22 @@ import java.util.List;
 public class TestDataManager {
 
     private String dataType = System.getProperty("td");
-    private RandomDataProvider randomData = new RandomDataProvider();
-    private StaticDataProvider staticData = new StaticDataProvider();
+    private IDataProvider randomData = new RandomDataProvider();
+    private IDataProvider staticData = new StaticDataProvider();
 
     public String generateTaskName() {
-        if (dataType.equals("random")) {
-            return randomData.provideTaskName();
-        } else if (dataType.equals("static")) {
-            return staticData.provideTaskName();
-        }
-        throw new RuntimeException("Invalid td parameter in execution command");
+        return selectDataProvider().provideTaskName();
     }
 
     public List<String> generateFewTasksName() {
+        return selectDataProvider().provideFewTasksName();
+    }
+
+    private IDataProvider selectDataProvider() {
         if (dataType.equals("random")) {
-            return randomData.provideFewTasksName();
+            return randomData;
         } else if (dataType.equals("static")) {
-            return staticData.provideFewTasksName();
+            return staticData;
         }
         throw new RuntimeException("Invalid td parameter in execution command");
     }
