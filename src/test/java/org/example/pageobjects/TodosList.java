@@ -71,4 +71,7 @@ public class TodosList extends PageObject {
             throw new AssertionError(String.format("Todo element %s not found", name));
         }
     };
+
+    public void waitForTask(String the_one) {
+    }
 }

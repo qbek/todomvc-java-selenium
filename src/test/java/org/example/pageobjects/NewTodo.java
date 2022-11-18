@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 
 public class NewTodo extends PageObject {
 
-    By todoInput = By.cssSelector(".new-todo");
+    private By todoInput = By.cssSelector(".new-todo");
 
-    @Step
+    @Step("Enters task name '{0}' into: #todoInput")
     public void createTask(String taskName) {
         find(todoInput).typeAndEnter(taskName);
     }

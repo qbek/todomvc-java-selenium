@@ -1,6 +1,7 @@
 package org.example.steps;
 
 import com.github.javafaker.Faker;
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.example.pageobjects.NewTodo;
@@ -16,6 +17,8 @@ public class UserSteps {
 
     private Faker generator = new Faker();
 
+    private String actor;
+
     @Steps
     NewTodo newTodoInput;
 
@@ -28,12 +31,14 @@ public class UserSteps {
     @Steps
     TodoMvcApp app;
 
-    @Step
+    @Step("#actor checks is on the todos list")
     public void userChecksIfTodoIsOnTheList() {
         todosList.checkIfTodoDisplayed(this.taskName);
     }
 
-    @Step
+
+
+    @Step("#actor create a new task")
     public void userCreatesNewTask() {
         this.taskName = generator.funnyName().name();
         newTodoInput.createTask(this.taskName);
@@ -88,11 +93,21 @@ public class UserSteps {
 
     @Step
     public void userCreateTheOne() {
+        Serenity.recordReportData().withTitle("What is THE ONE?").andContents("THE ONE exists only to be deleted");
         newTodoInput.createTask("THE ONE!!!");
     }
 
     @Step
     public void userDeletesTheOne() {
         todosList.deleteTask("THE ONE!!!");
+    }
+
+    @Step
+    public void userChecksIfTodoIsOnTheList(String the_one) {
+        todosList.checkIfTodoDisplayed("THE ONE");
+    }
+
+    public void userWaitForTheOne() {
+        todosList.waitForTask("THE ONE");
     }
 }

@@ -15,13 +15,12 @@ public abstract class BaseSetup {
     @Managed(driver = "firefox")
     WebDriver browser;
 
-    @Steps
+    @Steps(actor = "Fluffy Rabbit")
     UserSteps steps;
-
 
     @BeforeEach
     public void setup() throws IOException {
         steps.userOpensTodoMVCApp();
     }
-    
+
 }
