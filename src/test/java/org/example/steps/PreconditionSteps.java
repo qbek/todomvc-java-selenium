@@ -9,13 +9,13 @@ public class PreconditionSteps {
     UserActionSteps steps;
 
     @Step
-    public void userHasCompletedTask() {
+    public void userHasCompletedTodo() {
         steps.userCreatesNewTask();
         steps.userCompletesTheTask();
     }
 
     @Step
-    public void hasCreatedTodo() {
+    public void userHasCreatedTodo() {
         steps.userCreatesNewTask();
     }
 }

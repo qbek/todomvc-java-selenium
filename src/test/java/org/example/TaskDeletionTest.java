@@ -6,7 +6,7 @@ public class TaskDeletionTest extends BaseSetup {
 
     @Test
     public void userCanDeleteExistingTask() {
-        given.hasCreatedTodo();
+        given.userHasCreatedTodo();
         when.userDeletesTodo();
         then.userChecksIfTodoIsNotOnTheList();
     }

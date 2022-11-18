@@ -3,7 +3,6 @@ package org.example.steps;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.example.data.TestData;
 import org.example.data.TestDataManager;
 import org.example.pageobjects.NewTodo;
 import org.example.pageobjects.TodoFilters;
@@ -12,12 +11,13 @@ import org.example.pageobjects.TodosList;
 
 import java.io.IOException;
 
+import static net.serenitybdd.core.Serenity.sessionVariableCalled;
+import static net.serenitybdd.core.Serenity.setSessionVariable;
+import static org.example.data.TestDataEntities.TASK_NAME;
+
 public class UserActionSteps {
 
     private String actor;
-
-    @Steps(shared = true)
-    TestData testData;
 
     @Steps
     NewTodo newTodoInput;
@@ -36,8 +36,8 @@ public class UserActionSteps {
 
     @Step("#actor create a new task")
     public void userCreatesNewTask() {
-        testData.setTaskName(dataManager.generateTaskName());
-        newTodoInput.createTask(testData.getTaskName());
+        setSessionVariable(TASK_NAME).to(dataManager.generateTaskName());
+        newTodoInput.createTask(sessionVariableCalled(TASK_NAME));
     }
 
 

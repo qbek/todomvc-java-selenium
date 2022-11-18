@@ -2,25 +2,25 @@ package org.example.steps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.example.data.TestData;
 import org.example.pageobjects.TodosList;
+
+import static net.serenitybdd.core.Serenity.sessionVariableCalled;
+import static org.example.data.TestDataEntities.TASK_NAME;
 
 public class UserVerificationSteps {
 
     @Steps
     TodosList todosList;
 
-    @Steps(shared = true)
-    TestData testData;
 
     @Step
     public void userChecksIfTodoIsOnTheList() {
-        todosList.checkIfTodoDisplayed(testData.getTaskName());
+        todosList.checkIfTodoDisplayed(sessionVariableCalled(TASK_NAME));
     }
 
     @Step
     public void userChecksIfTaskIsNOTDisplayed() {
-        todosList.checkIfTodoNOTDisplayed(testData.getTaskName());
+        todosList.checkIfTodoNOTDisplayed(sessionVariableCalled(TASK_NAME));
     }
 
     @Step
@@ -30,7 +30,7 @@ public class UserVerificationSteps {
 
     @Step
     public void userChecksIfTodoIsNotOnTheList() {
-        todosList.checkIfTodoNOTDisplayed(testData.getTaskName());
+        todosList.checkIfTodoNOTDisplayed(sessionVariableCalled(TASK_NAME));
     }
 
     @Step
