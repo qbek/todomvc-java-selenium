@@ -1,9 +1,9 @@
 package org.example.steps;
 
-import com.github.javafaker.Faker;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
+import org.example.data.TestDataManager;
 import org.example.pageobjects.NewTodo;
 import org.example.pageobjects.TodoFilters;
 import org.example.pageobjects.TodoMvcApp;
@@ -14,9 +14,6 @@ import java.io.IOException;
 public class UserSteps {
 
     private String taskName;
-
-    private Faker generator = new Faker();
-
     private String actor;
 
     @Steps
@@ -31,6 +28,8 @@ public class UserSteps {
     @Steps
     TodoMvcApp app;
 
+    TestDataManager dataManager = new TestDataManager();
+
     @Step("#actor checks is on the todos list")
     public void userChecksIfTodoIsOnTheList() {
         todosList.checkIfTodoDisplayed(this.taskName);
@@ -40,7 +39,7 @@ public class UserSteps {
 
     @Step("#actor create a new task")
     public void userCreatesNewTask() {
-        this.taskName = generator.funnyName().name();
+        this.taskName = dataManager.generateTaskName();
         newTodoInput.createTask(this.taskName);
     }
 
@@ -83,9 +82,7 @@ public class UserSteps {
 
     @Step
     public void userCreatesFewTodos() {
-        var tasks = generator.lorem().sentences(
-                generator.number().numberBetween(0, 4)
-        );
+        var tasks = dataManager.generateFewTasksName();
         for (String task : tasks) {
             newTodoInput.createTask(task);
         }
