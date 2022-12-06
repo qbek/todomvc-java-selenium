@@ -5,11 +5,6 @@ import net.thucydides.core.annotations.Steps;
 import org.example.pageobjects.TodoInput;
 import org.example.pageobjects.TodoMVCApp;
 import org.example.pageobjects.TodosList;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-
-import static org.openqa.selenium.By.cssSelector;
 
 public class UserActions {
 
@@ -17,8 +12,7 @@ public class UserActions {
     TodoInput todoInput;
     @Steps
     TodosList todosList;
-    @Steps
-    TodoMVCApp mvcApp;
+
 
     @Step
     public void userCompletesTodo() {
@@ -30,8 +24,5 @@ public class UserActions {
         todoInput.createNewTodo(todoName);
     }
 
-    @Step
-    public void userOpensTodoMVCapp() {
-        mvcApp.openTodoMVCapp();
-    }
+
 }
