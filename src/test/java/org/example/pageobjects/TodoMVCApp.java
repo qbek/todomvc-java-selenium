@@ -1,16 +1,13 @@
 package org.example.pageobjects;
 
+import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebDriver;
 
-public class TodoMVCApp {
+public class TodoMVCApp extends PageObject {
 
-    private WebDriver browser;
-
-    public TodoMVCApp(WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public void openTodoMVCapp() {
-        browser.get("https://todomvc.com/examples/jquery/#/all");
+        getDriver().get("https://todomvc.com/examples/jquery/#/all");
     }
 }

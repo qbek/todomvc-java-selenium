@@ -1,33 +1,26 @@
 package org.example;
 
-import com.sun.xml.bind.v2.TODO;
-import jxl.common.AssertionFailed;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
 import org.example.steps.UserActions;
 import org.example.steps.UserVerifications;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.openqa.selenium.By.cssSelector;
-
+@ExtendWith(SerenityJUnit5Extension.class)
 public class CreationTodoTests {
 
-    private WebDriver browser = new FirefoxDriver();
+    @Managed(driver="firefox")
+    private WebDriver browser;
 
-    UserActions when = new UserActions(browser);
-    UserVerifications then = new UserVerifications(browser);
+    @Steps
+    UserActions when;
 
-    @AfterEach
-    public void closeTodoMVCapp() {
-        browser.close();
-    }
+    @Steps
+    UserVerifications then;
 
     @Test
     public void userCanCreateANewTodo() {

@@ -1,25 +1,18 @@
 package org.example.pageobjects;
 
+import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
 import static org.openqa.selenium.By.cssSelector;
 
-public class TodoInput {
+public class TodoInput extends PageObject {
 
-    private static final By TODO_INPUT_SELECTOR = cssSelector(".new-todo");
+    private static final By TODO_INPUT = cssSelector(".new-todo");
 
-    private WebDriver browser;
-
-    public TodoInput (WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public void createNewTodo(String name) {
-        var todoInput = browser.findElement(TODO_INPUT_SELECTOR);
-        todoInput.sendKeys(name);
-        todoInput.sendKeys(Keys.ENTER);
+        find(TODO_INPUT).typeAndEnter(name);
     }
 
 }

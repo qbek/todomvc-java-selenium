@@ -1,28 +1,23 @@
 package org.example.pageobjects;
 
+import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import static org.openqa.selenium.By.cssSelector;
 
-public class TodoFilters {
+public class TodoFilters extends PageObject {
 
     private static final By ACTIVE_FILTER_SELECTOR = cssSelector("[href=\"#/active\"]");
     private static final By COMPLETED_FILTER_SELECTOR = cssSelector("[href=\"#/completed\"]");
 
-    private WebDriver browser;
-
-    public TodoFilters (WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public void gotoActive() {
-        var activeFilter = browser.findElement(ACTIVE_FILTER_SELECTOR);
-        activeFilter.click();
+       find(ACTIVE_FILTER_SELECTOR).click();
     }
 
+    @Step
     public void gotoCompleted() {
-        var completedFilter = browser.findElement(COMPLETED_FILTER_SELECTOR);
-        completedFilter.click();
+        find(COMPLETED_FILTER_SELECTOR).click();
     }
 }
