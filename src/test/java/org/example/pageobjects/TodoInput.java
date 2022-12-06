@@ -10,7 +10,7 @@ public class TodoInput extends PageObject {
 
     private static final By TODO_INPUT = cssSelector(".new-todo");
 
-    @Step
+    @Step("Type into: #TODO_INPUT todo name: {0}")
     public void createNewTodo(String name) {
         find(TODO_INPUT).typeAndEnter(name);
     }

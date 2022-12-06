@@ -8,16 +8,16 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class TodoFilters extends PageObject {
 
-    private static final By ACTIVE_FILTER_SELECTOR = cssSelector("[href=\"#/active\"]");
-    private static final By COMPLETED_FILTER_SELECTOR = cssSelector("[href=\"#/completed\"]");
+    private static final By ACTIVE_FILTER = cssSelector("[href=\"#/active\"]");
+    private static final By COMPLETED_FILTER = cssSelector("[href=\"#/completed\"]");
 
-    @Step
+    @Step("Click on #ACTIVE_FILTER")
     public void gotoActive() {
-       find(ACTIVE_FILTER_SELECTOR).click();
+       find(ACTIVE_FILTER).click();
     }
 
-    @Step
+    @Step("Click on #COMPLETED_FILTER")
     public void gotoCompleted() {
-        find(COMPLETED_FILTER_SELECTOR).click();
+        find(COMPLETED_FILTER).click();
     }
 }
