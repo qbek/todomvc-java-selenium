@@ -47,4 +47,8 @@ public class UserVerifications {
         var todosNames = (List<String>) Serenity.sessionVariableCalled(TODOS_NAMES);
         todosList.checkIfAllTodosAreDisplayed(todosNames);
     }
+
+    public void userChecksIfDeletedTodoIsNotOnTheList(String todoName) {
+        todosList.checkIfTodoNOTDisplayed(todoName);
+    }
 }

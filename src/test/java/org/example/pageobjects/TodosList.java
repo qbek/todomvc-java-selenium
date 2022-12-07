@@ -1,10 +1,12 @@
 package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.SerenityActions;
 import net.serenitybdd.core.pages.WithByLocator;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TodosList extends PageObject {
     private static final By TODOS_LIST = cssSelector(".todo-list");
     private static final By TODO_ELEMENT = cssSelector(".todo-list li");
     private static final By TODO_COMPLETE_TOGGLE = cssSelector(".toggle");
+    private static final By TODO_DELETE = cssSelector(".destroy");
 
     @Step("On the list: #TODOS_LIST should be todo: {0}")
     public void checkIfTodoDisplayed (String name) {
@@ -49,4 +52,17 @@ public class TodosList extends PageObject {
 //        assertThat("At least todos in any order", actualTodosNames, hasItems(expectedTodosNames.toArray(new String[expectedTodosNames.size()])));
     }
 
+    @Step
+    public void deleteTodo() {
+        var actions = new Actions(getDriver());
+        actions.moveToElement(find(TODO_ELEMENT))
+                .click(find(TODO_DELETE))
+                .perform();
+
+//        find(TODO_ELEMENT).click();
+//        find(TODO_DELETE).click();
+
+//        moveTo(TODO_ELEMENT);
+//        find(TODO_DELETE).click();
+    }
 }

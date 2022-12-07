@@ -32,9 +32,15 @@ public class UserActions {
     }
 
 
+    @Step
     public void userCreatesFewTodos() {
         setupTodosNamesTestData();
         var todosNames = (List<String>) Serenity.sessionVariableCalled(TODOS_NAMES);
         todosNames.forEach( name -> todoInput.createNewTodo(name));
+    }
+
+    @Step
+    public void userDeletesTodo() {
+        todosList.deleteTodo();
     }
 }
