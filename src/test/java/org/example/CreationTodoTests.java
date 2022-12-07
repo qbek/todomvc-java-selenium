@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+import static org.example.data.TestDataManager.setupTodosNamesTestData;
 
 
 public class CreationTodoTests extends BaseSetup {
@@ -13,4 +14,10 @@ public class CreationTodoTests extends BaseSetup {
         then.userChecksIfTodoWasCreated(todoName);
     }
 
+    @Test
+    public void userCanCreateFewTodos() {
+        given.userIsOnTodoMVCapp();
+        when.userCreatesFewTodos();
+        then.userCheckIfAllTodosAreCreated();
+    }
 }

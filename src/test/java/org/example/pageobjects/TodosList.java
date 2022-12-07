@@ -3,7 +3,12 @@ package org.example.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WithByLocator;
 import net.thucydides.core.annotations.Step;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -34,4 +39,14 @@ public class TodosList extends PageObject {
     public void completeTodo() {
         find(TODO_COMPLETE_TOGGLE).click();
     }
+
+    @Step
+    public void checkIfAllTodosAreDisplayed(List<String> expectedTodosNames) {
+        var actualTodosNames = findEach(TODO_ELEMENT)
+                .map(todo -> todo.getText()).collect(Collectors.toList());
+        assertThat("All todos are on the list in any order", actualTodosNames, containsInAnyOrder(expectedTodosNames.toArray()));
+//        assertThat("All todos are on the list in exact order", actualTodosNames, equalTo(expectedTodosNames));
+//        assertThat("At least todos in any order", actualTodosNames, hasItems(expectedTodosNames.toArray(new String[expectedTodosNames.size()])));
+    }
+
 }
