@@ -2,16 +2,19 @@ package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.SerenityActions;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WithByLocator;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.openqa.selenium.By.cssSelector;
@@ -64,5 +67,21 @@ public class TodosList extends PageObject {
 
 //        moveTo(TODO_ELEMENT);
 //        find(TODO_DELETE).click();
+    }
+
+    public void deleteTodo(String name) {
+        var todo = findTodoWithName(name);
+        todo.click();
+        todo.find(TODO_DELETE).click();
+    }
+
+    private WebElementFacade findTodoWithName(String name) {
+        var allTodos = findAll(TODO_ELEMENT);
+        for (var todo : allTodos) {
+            if (todo.getText().equals(name)) {
+                return todo;
+            }
+        }
+        throw new AssertionError(format("Todo with %s name dosn't exist", name));
     }
 }

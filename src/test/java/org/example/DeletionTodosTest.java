@@ -17,4 +17,12 @@ public class DeletionTodosTest extends BaseSetup {
         when.userDeletesTodo();
         then.userChecksIfDeletedTodoIsNotOnTheList(todoName);
     }
+
+    @Test
+    public void userCanDeleteTheONE() {
+        when.userCreatesFewTodos();
+        when.userCreatesNewTodo("THE ONE");
+        when.userCreatesFewTodos();
+        when.userDeletesTodo("THE ONE");
+    }
 }

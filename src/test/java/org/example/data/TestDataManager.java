@@ -1,5 +1,6 @@
 package org.example.data;
 
+import com.github.javafaker.Faker;
 import net.serenitybdd.core.Serenity;
 
 import java.util.ArrayList;
@@ -10,8 +11,10 @@ import static org.example.data.TestDataTypes.TODOS_NAMES;
 
 public class TestDataManager {
 
+    static Faker faker = new Faker();
+
     public static void setupTodosNamesTestData() {
-        var todosNames = new ArrayList<String>(Arrays.asList("Zadanie 1", "Zadanie 2", "Zadanie 3"));
+        var todosNames = faker.lorem().sentences(faker.number().numberBetween(2, 4));;
         Serenity.setSessionVariable(TODOS_NAMES).to(todosNames);
     }
 }

@@ -43,4 +43,9 @@ public class UserActions {
     public void userDeletesTodo() {
         todosList.deleteTodo();
     }
+
+    @Step
+    public void userDeletesTodo(String name) {
+        todosList.deleteTodo(name);
+    }
 }
