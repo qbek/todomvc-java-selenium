@@ -68,6 +68,7 @@ public class TodosList extends PageObject {
 //        find(TODO_DELETE).click();
     }
 
+    @Step
     public void deleteTodo(String name) {
         var todo = findTodoWithName(name);
         todo.click();
@@ -80,16 +81,17 @@ public class TodosList extends PageObject {
                     .findFirst().orElseThrow(todoNotFoundError(name));
     }
 
+    @Step
     public void waitForTodo(String name) {
         try {
             Awaitility.await()
+                    .pollInSameThread()
                     .atMost(15, TimeUnit.SECONDS).pollInterval(1, TimeUnit.SECONDS)
                     .until(new WaitUntilTodoExists(name));
         } catch (ConditionTimeoutException e) {
             throw (AssertionError) todoNotFoundError(name).get();
         }
     }
-
 
     private class WaitUntilTodoExists implements Callable<Boolean> {
         private String name;

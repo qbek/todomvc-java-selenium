@@ -1,5 +1,6 @@
 package org.example;
 
+import net.thucydides.core.ThucydidesSystemProperty;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ public class HelloWorld {
             soft.assertThat("ccc").isEqualTo("ccc");
             soft.assertThat("ddd").isEqualTo("1");
         });
+
     }
 
     @Test

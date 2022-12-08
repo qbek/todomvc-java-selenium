@@ -7,8 +7,12 @@ import org.example.steps.UserActions;
 import org.example.steps.UserPreconditions;
 import org.example.steps.UserVerifications;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.Extensions;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
 
