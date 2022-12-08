@@ -48,4 +48,9 @@ public class UserActions {
     public void userDeletesTodo(String name) {
         todosList.deleteTodo(name);
     }
+
+    @Step
+    public void userWaitsForTodo(String name) {
+        todosList.waitForTodo(name);
+    }
 }

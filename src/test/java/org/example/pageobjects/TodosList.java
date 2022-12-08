@@ -4,10 +4,13 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.awaitility.Awaitility;
+import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
@@ -76,6 +79,29 @@ public class TodosList extends PageObject {
                     .filter(todo -> (todo.getText().equals(name)))
                     .findFirst().orElseThrow(todoNotFoundError(name));
     }
+
+    public void waitForTodo(String name) {
+        try {
+            Awaitility.await()
+                    .atMost(15, TimeUnit.SECONDS).pollInterval(1, TimeUnit.SECONDS)
+                    .until(new WaitUntilTodoExists(name));
+        } catch (ConditionTimeoutException e) {
+            throw (AssertionError) todoNotFoundError(name).get();
+        }
+    }
+
+
+    private class WaitUntilTodoExists implements Callable<Boolean> {
+        private String name;
+
+        public WaitUntilTodoExists(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+            System.out.println("todo not exist, waiting.....");
+            return find(TODOS_LIST).containsText(name);
         }
     }
 }
