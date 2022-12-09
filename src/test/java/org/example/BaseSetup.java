@@ -16,8 +16,8 @@ import org.openqa.selenium.WebDriver;
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseSetup {
 
-    @Managed(driver="firefox")
-    private WebDriver browser;
+    @Managed
+    WebDriver browser;
 
     @Steps
     UserPreconditions given;

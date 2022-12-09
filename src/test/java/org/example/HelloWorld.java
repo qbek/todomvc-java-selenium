@@ -30,7 +30,6 @@ public class HelloWorld {
             soft.assertThat("ccc").isEqualTo("ccc");
             soft.assertThat("ddd").isEqualTo("1");
         });
-
     }
 
     @Test

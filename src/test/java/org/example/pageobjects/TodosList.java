@@ -49,6 +49,7 @@ public class TodosList extends PageObject {
     public void checkIfAllTodosAreDisplayed(List<String> expectedTodosNames) {
         var actualTodosNames = findEach(TODO_ELEMENT)
                 .map(todo -> todo.getText()).collect(Collectors.toList());
+
         assertThat("All todos are on the list in any order", actualTodosNames, containsInAnyOrder(expectedTodosNames.toArray()));
 //        assertThat("All todos are on the list in exact order", actualTodosNames, equalTo(expectedTodosNames));
 //        assertThat("At least todos in any order", actualTodosNames, hasItems(expectedTodosNames.toArray(new String[expectedTodosNames.size()])));

@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 public class CustomAssertionErrorFactory {
 
-    public static Supplier todoNotFoundError(String name) {
+    public static Supplier<AssertionError> todoNotFoundError(String name) {
         return () -> new AssertionError("Todo not exists on page: " + name);
     }
 }
