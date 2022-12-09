@@ -1,9 +1,12 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+
 import static org.example.data.TestDataManager.setupTodosNamesTestData;
 
-
+@Execution(ExecutionMode.SAME_THREAD)
 public class CreationTodoTests extends BaseSetup {
 
     @Test

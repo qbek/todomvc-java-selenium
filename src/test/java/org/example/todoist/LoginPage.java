@@ -3,7 +3,7 @@ package org.example.todoist;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.Cookie;
 
 import static org.openqa.selenium.By.cssSelector;
 
@@ -46,5 +46,16 @@ public class LoginPage extends PageObject {
     @Step
     public void waitForTodoistMainPage() {
         find(TOP_BAR).waitUntilVisible();
+    }
+
+    public Cookie getUserAuthCookie() {
+        return getDriver().manage().getCookieNamed("todoistd");
+    }
+
+    @Step
+    public void userIsLoggedIn(Cookie authCookie) {
+        getDriver().get("https://todoist.com/static/favicon-16x16.png");
+        getDriver().manage().addCookie(authCookie);
+        getDriver().get("https://todoist.com/app/");
     }
 }
