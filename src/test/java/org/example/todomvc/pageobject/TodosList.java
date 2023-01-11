@@ -15,21 +15,17 @@ public class TodosList extends PageObject {
 
     @Step
     public void completeTodo () {
-        WebElement toggle = getDriver().findElement(TODO_COMPLETION_TOGGLE);
-        toggle.click();
+        find(TODO_COMPLETION_TOGGLE).click();
     }
 
     @Step("Check if todo name is in element: #TODO_ELEMENT")
     public void checkIfTodoDisplayed(String expectedName) {
-        WebElement todo = getDriver().findElement(TODO_ELEMENT);
-        String todoText = todo.getText();
-        Assertions.assertThat(todoText).isEqualTo(expectedName);
+        find(TODO_ELEMENT).shouldContainOnlyText(expectedName);
     }
 
     @Step
     public void checkIfTodoCompleted() {
-        WebElement todo = getDriver().findElement(TODO_ELEMENT);
-        String classes = todo.getAttribute("class");
+        String classes = find(TODO_ELEMENT).getAttribute("class");
         Assertions.assertThat(classes).as("Completed todo should have class completed").isEqualTo("completed");
     }
 }

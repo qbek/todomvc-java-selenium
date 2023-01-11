@@ -1,6 +1,7 @@
 package org.example.todomvc.pageobject;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
@@ -14,9 +15,7 @@ public class TodoInput extends PageObject {
 
     @Step("Type todo name: {0} into: #NEW_TODO_INPUT and press ENTER")
     public void createTodo(String name) {
-        WebElement todoInput = getDriver().findElement(NEW_TODO_INPUT);
-        todoInput.sendKeys(name);
-        todoInput.sendKeys(Keys.ENTER);
+        find(NEW_TODO_INPUT).typeAndEnter(name);
     }
 
 }

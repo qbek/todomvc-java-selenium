@@ -1,6 +1,7 @@
 package org.example.todomvc;
 
 import org.assertj.core.api.Assertions;
+import org.example.todomvc.data.TestData;
 import org.example.todomvc.steps.UserActions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class CreatingTodosTests extends BaseSetup {
 
     @Test
     public void userCanCreateNewTodo() {
-        String todoName = "To moje lepsze zadanie";
+        String todoName = TestData.getTodoName();
         step.userOpensTodoMVCApp();
         step.userCreatesANewTodo(todoName);
         validateStep.userChecksIfTodoWasCreated(todoName);

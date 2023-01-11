@@ -1,5 +1,6 @@
 package org.example;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,5 +20,16 @@ public class HelloWorld {
         browser.get("http://google.com");
         Thread.sleep(2000);
         browser.close();
+    }
+
+
+    @Test
+    public void fakerExamples() {
+        Faker gen = new Faker();
+
+        String result = gen.numerify("###########");
+
+        System.out.println(result);
+
     }
 }
