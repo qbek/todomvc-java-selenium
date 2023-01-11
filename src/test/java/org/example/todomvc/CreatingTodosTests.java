@@ -17,7 +17,6 @@ public class CreatingTodosTests extends BaseSetup {
         String todoName = "To moje lepsze zadanie";
         step.userOpensTodoMVCApp();
         step.userCreatesANewTodo(todoName);
-        step.userChecksIfTodoWasCreated(todoName);
+        validateStep.userChecksIfTodoWasCreated(todoName);
     }
-
 }
