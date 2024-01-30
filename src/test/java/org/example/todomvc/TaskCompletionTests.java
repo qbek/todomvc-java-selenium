@@ -19,7 +19,7 @@ public class TaskCompletionTests extends BaseTestSetup {
         steps.userOpensTodoMVCapp();
         steps.userCreatesANewTask(todoName);
         steps.userCompletesTheTask();
-        steps.userChecksIfTaskInNOTOnActiveTab(todoName);
+        steps.userChecksIfTaskInNOTOnActiveTab();
     }
 
     @Test

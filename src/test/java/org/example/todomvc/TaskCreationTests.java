@@ -1,5 +1,7 @@
 package org.example.todomvc;
 
+import org.example.todomvc.pageobjects.NewTodoInputPO;
+import org.example.todomvc.pageobjects.TodoMVCapp;
 import org.example.todomvc.steps.UserSteps;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -15,5 +17,4 @@ public class TaskCreationTests extends BaseTestSetup {
         steps.userCreatesANewTask(todoName);
         steps.userChecksIfTaskCreated(todoName);
     }
-
 }
