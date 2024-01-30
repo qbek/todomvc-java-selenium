@@ -1,17 +1,6 @@
 package org.example.todomvc;
 
-import org.example.todomvc.steps.UserSteps;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.List;
 
 public class TaskCompletionTests extends BaseTestSetup {
 
@@ -22,7 +11,23 @@ public class TaskCompletionTests extends BaseTestSetup {
         steps.userCreatesANewTask(todoName);
         steps.userCompletesTheTask();
         steps.userChecksIfTaskIsMarkedAsCompleted();
+    }
+
+    @Test
+    public void userCanFilterActiveTasks() {
+        String todoName = "Moje zadanie";
+        steps.userOpensTodoMVCapp();
+        steps.userCreatesANewTask(todoName);
+        steps.userCompletesTheTask();
         steps.userChecksIfTaskInNOTOnActiveTab(todoName);
+    }
+
+    @Test
+    public void usercanFilterCompletedTasks () {
+        String todoName = "Moje zadanie";
+        steps.userOpensTodoMVCapp();
+        steps.userCreatesANewTask(todoName);
+        steps.userCompletesTheTask();
         steps.userChecksIfTaskIsOnCompletedTab(todoName);
     }
 }

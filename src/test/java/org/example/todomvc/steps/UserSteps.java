@@ -45,7 +45,7 @@ public class UserSteps {
 
     public void userChecksIfTaskIsMarkedAsCompleted() {
         WebElement taskItem = browser.findElement(todoItemEl);
-        String taskClasses = taskItem.getAttribute("class");
+        String taskClasses = taskItem.getAttribute("classssss");
         MatcherAssert.assertThat("Task should be marked as completed", taskClasses, Matchers.equalTo("completed"));
     }
 
