@@ -1,5 +1,6 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -13,24 +14,21 @@ public class TodosListPO extends PageObject {
     By completeButtonEl = By.cssSelector(".toggle");
     By todoItemEl = By.cssSelector(".todo-list li");
 
+    @Step
     public void checkIfTaskExists(String name) {
-        WebElement todoItem = getDriver().findElement(todoListEl);
-        MatcherAssert.assertThat("Todo has correct name", todoItem.getText(), Matchers.equalTo(name));
+        find(todoListEl).shouldContainText(name);
     }
 
     public void completeTask() {
-        WebElement completedButton = getDriver().findElement(completeButtonEl);
-        completedButton.click();
+        find(completeButtonEl).click();
     }
 
     public void checkIfTaskCompleted() {
-        WebElement taskItem = getDriver().findElement(todoItemEl);
-        String taskClasses = taskItem.getAttribute("class");
+        String taskClasses = find(todoItemEl).getAttribute("class");
         MatcherAssert.assertThat("Task should be marked as completed", taskClasses, Matchers.equalTo("completed"));
     }
 
     public void checkIfTaskNotExists() {
-        List<WebElement> todoList = getDriver().findElements(todoListEl);
-        MatcherAssert.assertThat("Task should not be on the Active list", todoList, Matchers.hasSize(0));
+        MatcherAssert.assertThat("Task should not be on the Active list", findAll(todoListEl), Matchers.hasSize(0));
     }
 }

@@ -3,6 +3,7 @@ package org.example.todomvc.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class TaskFiltersPO extends PageObject {
 
@@ -10,12 +11,10 @@ public class TaskFiltersPO extends PageObject {
     By activeTabEl = By.cssSelector("[href=\"#/active\"]");
 
     public void gotoActiveTasks() {
-        WebElement activeTab = getDriver().findElement(activeTabEl);
-        activeTab.click();
+        find(activeTabEl).click();
     }
 
     public void gotoCompletedTasks() {
-        WebElement completedTab = getDriver().findElement(completeTabEl);
-        completedTab.click();
+        find(completeTabEl).click();
     }
 }

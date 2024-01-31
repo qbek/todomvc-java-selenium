@@ -1,6 +1,7 @@
 package org.example.todomvc;
 
 import net.serenitybdd.annotations.Managed;
+import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.example.todomvc.steps.UserSteps;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +15,7 @@ public class BaseTestSetup {
     @Managed(driver = "firefox")
     WebDriver browser;
 
-    UserSteps steps = new UserSteps();
+    @Steps
+    UserSteps steps;
 
 }
