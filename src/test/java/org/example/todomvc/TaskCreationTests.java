@@ -15,6 +15,6 @@ public class TaskCreationTests extends BaseTestSetup {
         String todoName = "Moje zadanie";
         steps.userOpensTodoMVCapp();
         steps.userCreatesANewTask(todoName);
-        steps.userChecksIfTaskCreated(todoName);
+        steps.userChecksIfTaskCreated("sadgfasdgasdg");
     }
 }
