@@ -1,5 +1,6 @@
 package org.example.todomvc.steps;
 
+import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,6 +23,7 @@ public class UserSteps {
 
     private WebDriver browser = new FirefoxDriver();
 
+    @Step
     public void userChecksIfCompletedTodoIsOnCompletedList(String todoName) {
         var completedFilter = browser.findElement(completedFilterEl);
         completedFilter.click();
@@ -29,6 +31,7 @@ public class UserSteps {
         assertThat("Todo is on completed list", todoList.getText(), equalTo(todoName));
     }
 
+    @Step
     public void userChecksIfCompltedTodoIsNotOnActiveList() {
         var activeFilter = browser.findElement(activeFilterEl);
         activeFilter.click();
@@ -42,30 +45,44 @@ public class UserSteps {
         assertThat("Todo is not on the Active filter list", todoList, hasSize(0));
     }
 
+    @Step
     public void userChecksIfTodoMarkedAsCompleted() {
         var todoItem = browser.findElement(todoEl);
         assertThat("Todo is marked as completed", todoItem.getAttribute("class"), containsString("completed"));
     }
 
+    @Step
     public void userCompletesTodo() {
         var completeToggle = browser.findElement(completeTodoToggleEl);
         completeToggle.click();
     }
 
+    @Step
     public void userOpensTodoMVCapp() {
+        openBrowser();
+        navidateToTodoMVC();
         browser.get(todoMvcURL);
     }
+
+
+    @Step
+    public void openBrowser() {}
+
+    @Step
+    public void navidateToTodoMVC() {}
 
     public void userClosesTodoMVCapp() {
         browser.close();
     }
 
+    @Step("New todo wit name '{0}' is created")
     public void userCreatesANewTodo(String name) {
         var newTodoInput = browser.findElement(newTodoInputEl);
         newTodoInput.sendKeys(name);
         newTodoInput.sendKeys(ENTER);
     }
 
+    @Step
     public void userChecksIfTodoIsCreated(String expectedName) {
         var todoItem = browser.findElement(todoListEl);
         assertThat("Todo has correct name", todoItem.getText(), equalTo(expectedName));

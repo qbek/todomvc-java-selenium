@@ -1,14 +1,18 @@
 package org.example.todomvc;
 
+import net.serenitybdd.annotations.Steps;
+import org.example.todomvc.steps.PreconditionsSteps;
 import org.junit.jupiter.api.Test;
 
 public class TodoCompleteTests extends BaseTestSetup {
 
+    @Steps
+    PreconditionsSteps precondition;
+
     @Test
     public void userCanCompleteTodo() {
         var todoName = "jakies inne zadaie";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(todoName);
+        precondition.userHasTodoCreated(todoName);
         steps.userCompletesTodo();
         steps.userChecksIfTodoMarkedAsCompleted();
     }
@@ -16,8 +20,8 @@ public class TodoCompleteTests extends BaseTestSetup {
     @Test
     public void userCanFilterOutCompletedTodos() {
         var todoName = "jakies inne zadaie";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(todoName);
+        precondition.userHasTodoCreated(todoName);
+
         steps.userCompletesTodo();
         steps.userChecksIfCompltedTodoIsNotOnActiveList();
     }
@@ -25,10 +29,11 @@ public class TodoCompleteTests extends BaseTestSetup {
     @Test
     public  void userCanFilterCompletexTodos() {
         var todoName = "jakies inne zadaie";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(todoName);
+        precondition.userHasTodoCreated(todoName);
         steps.userCompletesTodo();
         steps.userChecksIfCompletedTodoIsOnCompletedList(todoName);
     }
-
 }
+
+
+
