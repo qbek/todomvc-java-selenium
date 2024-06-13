@@ -7,6 +7,8 @@ import org.example.todomvc.pageobjects.TodoFilters;
 import org.example.todomvc.pageobjects.TodoList;
 import org.example.todomvc.pageobjects.TodoMVC;
 
+import java.util.List;
+
 public class UserSteps {
     @Steps
     private NewTodoInput newTodoInput;
@@ -53,5 +55,15 @@ public class UserSteps {
     @Step
     public void userChecksIfTodoIsCreated(String expectedName) {
        todoList.checkIfTodoOnTheList(expectedName);
+    }
+
+    public void userCreatesAFewTodos(List<String> todos) {
+        for (var todo : todos) {
+            userCreatesANewTodo(todo);
+        }
+    }
+
+    public void userChecksIfAllTodosAreCreated(List<String> todos) {
+        todoList.checkIfAllTodosAreOnTheList(todos);
     }
 }
