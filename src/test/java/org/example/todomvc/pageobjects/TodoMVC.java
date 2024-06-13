@@ -3,12 +3,22 @@ package org.example.todomvc.pageobjects;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 
-public class TodoMVC extends PageObject {
+import java.io.IOException;
+import java.util.Properties;
 
-    private String todoMvcURL = "https://todomvc.com/examples/angular/dist/browser/#";
+public class TodoMVC extends PageObject {
 
     @Step
     public void openApp () {
-        getDriver().get(todoMvcURL);
+        try {
+            var env = System.getProperty("env");
+            var filename = String.format("/%s.env.properties", env);
+            var file = this.getClass().getResourceAsStream(filename);
+            var cfg = new Properties();
+            cfg.load(file);
+            getDriver().get(cfg.getProperty("TODO_MVC_URL"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

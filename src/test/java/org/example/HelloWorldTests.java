@@ -1,10 +1,9 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class HelloWorld {
+public class HelloWorldTests {
 
     @Test
     public void browserTest() throws InterruptedException {
@@ -12,5 +11,12 @@ public class HelloWorld {
         browser.get("http://www.google.com");
         Thread.sleep(5000);
         browser.close();
+    }
+
+
+    @Test
+    public void systemPropsExample() {
+        var cos = System.getProperty("cos");
+        System.out.println(cos);
     }
 }

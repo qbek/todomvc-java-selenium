@@ -6,7 +6,7 @@ public class TodoCreationTests extends BaseTestSetup {
 
     @Test
     public void userCanCreateATodo() {
-        var todoName = "Moje lepsze zadanie 2";
+        var todoName = testData.getTaskName();
         steps.userOpensTodoMVCapp();
         steps.userCreatesANewTodo(todoName);
         steps.userChecksIfTodoIsCreated(todoName);
