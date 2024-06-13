@@ -1,10 +1,11 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.By.cssSelector;
 
 public class TodoList extends PageObject {
@@ -12,27 +13,29 @@ public class TodoList extends PageObject {
     private By todoEl = cssSelector(".todo-list li");
     private By completeTodoToggleEl = cssSelector(".toggle");
 
+    @Step
     public void checkIfTodoOnTheList(String name) {
-        var todoList = getDriver().findElement(todoListEl);
-        assertThat("Todo is on completed list", todoList.getText(), equalTo(name));
+        find(todoListEl).shouldContainOnlyText(name);
     }
 
+    @Step
     public void checkIfTodoNOTOnTheList() {
         //jquery solution
 //        var todoList = browser.findElement(todoListEl);
 //        assertThat("Todo is not on the Active filter list", todoList.getText(), is(emptyString()));
+
+//        find(todoListEl).shouldContainOnlyText("");
         //angular solution
-        var todoList = getDriver().findElements(todoListEl);
-        assertThat("Todo is not on the Active filter list", todoList, hasSize(0));
+        find(todoListEl).shouldNotBePresent();
     }
 
+    @Step
     public void checkIfTodoMarkedAsCompleted() {
-        var todoItem = getDriver().findElement(todoEl);
-        assertThat("Todo is marked as completed", todoItem.getAttribute("class"), containsString("completed"));
+        assertThat("Todo is marked as completed", find(todoEl).getAttribute("class"), containsString("completed"));
     }
 
+    @Step
     public void markTodoCompleted() {
-        var completeToggle = getDriver().findElement(completeTodoToggleEl);
-        completeToggle.click();
+        find(completeTodoToggleEl).click();
     }
 }

@@ -52,6 +52,6 @@ public class UserSteps {
 
     @Step
     public void userChecksIfTodoIsCreated(String expectedName) {
-       todoList.checkIfTodoOnTheList(expectedName + "aaa");
+       todoList.checkIfTodoOnTheList(expectedName);
     }
 }

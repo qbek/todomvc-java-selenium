@@ -1,5 +1,6 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 
@@ -10,13 +11,13 @@ public class NewTodoInput extends PageObject {
     private By newTodoInputEl = cssSelector(".new-todo");
 
 
+    @Step
     public void enterTodoName(String name) {
-        var newTodoInput = getDriver().findElement(newTodoInputEl);
-        newTodoInput.sendKeys(name);
+        find(newTodoInputEl).type(name);
     }
 
+    @Step
     public void submitTodo() {
-        var newTodoInput = getDriver().findElement(newTodoInputEl);
-        newTodoInput.sendKeys(ENTER);
+        find(newTodoInputEl).type(ENTER);
     }
 }

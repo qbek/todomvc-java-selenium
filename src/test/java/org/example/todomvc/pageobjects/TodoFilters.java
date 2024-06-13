@@ -1,5 +1,6 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 
@@ -10,13 +11,13 @@ public class TodoFilters extends PageObject {
     private By completedFilterEl = cssSelector("[href=\"#/completed\"]");
     private By activeFilterEl = cssSelector("[href=\"#/active\"]");
 
+    @Step
     public void gotoActive() {
-        var activeFilter = getDriver().findElement(activeFilterEl);
-        activeFilter.click();
+        find(activeFilterEl).click();
     }
 
+    @Step
     public void gotoCompleted() {
-        var completedFilter = getDriver().findElement(completedFilterEl);
-        completedFilter.click();
+        find(completedFilterEl).click();
     }
 }

@@ -21,7 +21,6 @@ public class TodoCompleteTests extends BaseTestSetup {
     public void userCanFilterOutCompletedTodos() {
         var todoName = "jakies inne zadaie";
         precondition.userHasTodoCreated(todoName);
-
         steps.userCompletesTodo();
         steps.userChecksIfCompltedTodoIsNotOnActiveList();
     }
