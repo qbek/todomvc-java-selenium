@@ -1,90 +1,57 @@
 package org.example.todomvc.steps;
 
 import net.serenitybdd.annotations.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.openqa.selenium.By.cssSelector;
-import static org.openqa.selenium.Keys.ENTER;
+import net.serenitybdd.annotations.Steps;
+import org.example.todomvc.pageobjects.NewTodoInput;
+import org.example.todomvc.pageobjects.TodoFilters;
+import org.example.todomvc.pageobjects.TodoList;
+import org.example.todomvc.pageobjects.TodoMVC;
 
 public class UserSteps {
-
-    private By newTodoInputEl = cssSelector(".new-todo");
-    private By todoListEl = cssSelector(".todo-list");
-    private By todoEl = cssSelector(".todo-list li");
-    private By completedFilterEl = cssSelector("[href=\"#/completed\"]");
-    private By activeFilterEl = cssSelector("[href=\"#/active\"]");
-    private By completeTodoToggleEl = cssSelector(".toggle");
-
-    private String todoMvcURL = "https://todomvc.com/examples/angular/dist/browser/#";
-
-    private WebDriver browser = new FirefoxDriver();
+    @Steps
+    private NewTodoInput newTodoInput;
+    @Steps
+    private TodoList todoList;
+    @Steps
+    private TodoFilters todoFilters;
+    @Steps
+    private TodoMVC todoMVC;
 
     @Step
     public void userChecksIfCompletedTodoIsOnCompletedList(String todoName) {
-        var completedFilter = browser.findElement(completedFilterEl);
-        completedFilter.click();
-        var todoList = browser.findElement(todoListEl);
-        assertThat("Todo is on completed list", todoList.getText(), equalTo(todoName));
+        todoFilters.gotoCompleted();
+        todoList.checkIfTodoOnTheList(todoName);
     }
 
     @Step
     public void userChecksIfCompltedTodoIsNotOnActiveList() {
-        var activeFilter = browser.findElement(activeFilterEl);
-        activeFilter.click();
-
-        //jquery solution
-//        var todoList = browser.findElement(todoListEl);
-//        assertThat("Todo is not on the Active filter list", todoList.getText(), is(emptyString()));
-
-        //angular solution
-        var todoList = browser.findElements(todoListEl);
-        assertThat("Todo is not on the Active filter list", todoList, hasSize(0));
+        todoFilters.gotoActive();
+        todoList.checkIfTodoNOTOnTheList();
     }
 
     @Step
     public void userChecksIfTodoMarkedAsCompleted() {
-        var todoItem = browser.findElement(todoEl);
-        assertThat("Todo is marked as completed", todoItem.getAttribute("class"), containsString("completed"));
+        todoList.checkIfTodoMarkedAsCompleted();
     }
 
     @Step
     public void userCompletesTodo() {
-        var completeToggle = browser.findElement(completeTodoToggleEl);
-        completeToggle.click();
+        todoList.markTodoCompleted();
     }
 
     @Step
     public void userOpensTodoMVCapp() {
-        openBrowser();
-        navidateToTodoMVC();
-        browser.get(todoMvcURL);
-    }
-
-
-    @Step
-    public void openBrowser() {}
-
-    @Step
-    public void navidateToTodoMVC() {}
-
-    public void userClosesTodoMVCapp() {
-        browser.close();
+        todoMVC.openApp();
     }
 
     @Step("New todo wit name '{0}' is created")
     public void userCreatesANewTodo(String name) {
-        var newTodoInput = browser.findElement(newTodoInputEl);
-        newTodoInput.sendKeys(name);
-        newTodoInput.sendKeys(ENTER);
+        newTodoInput.enterTodoName(name);
+        newTodoInput.submitTodo();
     }
 
     @Step
     public void userChecksIfTodoIsCreated(String expectedName) {
-        var todoItem = browser.findElement(todoListEl);
-        assertThat("Todo has correct name", todoItem.getText(), equalTo(expectedName));
+       todoList.checkIfTodoOnTheList(expectedName + "aaa");
     }
 }
