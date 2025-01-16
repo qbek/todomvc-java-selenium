@@ -3,6 +3,7 @@ package org.example.todomvc;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,6 +19,12 @@ public class CreateTodoTests {
 
     By newTodoInputEl = By.cssSelector("#new-todo");
     By todosListEl = By.cssSelector("#todo-list");
+    By todoItemEl = By.cssSelector("#todo-list li");
+
+    By todoCompleteToggleEl = By.cssSelector(".toggle");
+
+    By completeTabEl = By.cssSelector("[href=\"#/completed\"]");
+    By activeTabEl = By.cssSelector("[href=\"#/active\"]");
 
     WebDriver browser = new FirefoxDriver();
 
@@ -31,6 +38,45 @@ public class CreateTodoTests {
         userOpensTodoMVCapp();
         userCreatesANewTodo();
         userChecksIfTodoIsCreated();
+    }
+
+    @Test
+    public void userCanCompleteATodo() {
+        userOpensTodoMVCapp();
+        userCreatesANewTodo();
+        userCompletesTodo();
+        userChecksIfTodoMarkedAsCompleted();
+        userChecksIfCompletedTodoIsNotOnActiveTab();
+        userChecksIfCompletedTodoIsOnCompletedTab();
+    }
+
+    private void userChecksIfCompletedTodoIsOnCompletedTab() {
+        var completedFilter = browser.findElement(completeTabEl);
+        completedFilter.click();
+        WebElement todosList = browser.findElement(todosListEl);
+        MatcherAssert.assertThat("Created todo is displayed on the list", todosList.getText(), Matchers.equalTo(todoName));
+    }
+
+    private void userChecksIfCompletedTodoIsNotOnActiveTab() {
+        var activeFilter = browser.findElement(activeTabEl);
+        activeFilter.click();
+        var todosList = browser.findElement(todosListEl);
+        MatcherAssert.assertThat("Todo is not on the Active list", todosList.getText(), Matchers.emptyOrNullString());
+    }
+
+    private void userChecksIfTodoMarkedAsCompleted() {
+        var todoItem = browser.findElement(todoItemEl);
+
+        //sprawdzenie czy element isnieje na stronie (czyste selenium)
+        var completeTodo = browser.findElements(By.cssSelector(".completed"));
+        MatcherAssert.assertThat("Completed todo is displayed", completeTodo, Matchers.hasSize(1));
+
+        MatcherAssert.assertThat("Todo is marked as completed", todoItem.getDomAttribute("class"), Matchers.containsString("completed"));
+    }
+
+    private void userCompletesTodo() {
+        var completeTodoToggleEl = browser.findElement(todoCompleteToggleEl);
+        completeTodoToggleEl.click();
     }
 
     private void userOpensTodoMVCapp() {
