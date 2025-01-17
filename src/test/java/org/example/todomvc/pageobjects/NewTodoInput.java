@@ -18,5 +18,4 @@ public class NewTodoInput extends PageObject {
     public void submitTodo() {
         find(newTodoInputEl).sendKeys(Keys.ENTER);
     }
-
 }

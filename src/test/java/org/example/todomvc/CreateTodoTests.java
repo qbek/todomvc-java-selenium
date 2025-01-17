@@ -1,11 +1,8 @@
 package org.example.todomvc;
 
-import org.example.todomvc.pageobjects.NewTodoInput;
-import org.example.todomvc.pageobjects.TodoFilters;
-import org.example.todomvc.pageobjects.TodoMVCApp;
-import org.example.todomvc.pageobjects.TodosList;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+
+import java.util.Arrays;
 
 public class CreateTodoTests extends BaseTestSetup {
 
@@ -17,4 +14,14 @@ public class CreateTodoTests extends BaseTestSetup {
         userActions.userChecksIfTodoIsCreated();
     }
 
+    @Test
+    public void userCanAddFewTodos() {
+        var names = Arrays.asList("Todo 11", "Todo 33");
+        var expected = Arrays.asList("Todo 11", "Todo 33");
+        userActions.userOpensTodoMVCapp();
+        userActions.userCreatesAFewTodos(names);
+        userActions.userChecksIfAllTodosAreCreated(expected);
+    }
+
 }
+

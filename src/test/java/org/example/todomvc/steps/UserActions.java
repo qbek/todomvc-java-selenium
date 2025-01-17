@@ -7,9 +7,13 @@ import org.example.todomvc.pageobjects.TodoFilters;
 import org.example.todomvc.pageobjects.TodoMVCApp;
 import org.example.todomvc.pageobjects.TodosList;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class UserActions {
 
     String todoName;
+    List<String> todosNames;
 
     @Steps
     NewTodoInput newTodoInput;
@@ -24,7 +28,7 @@ public class UserActions {
     @Step
     public void userChecksIfCompletedTodoIsOnCompletedTab() {
         todoFilters.goToCompletedTab();
-        todosList.checkTodoIsOnTheList(todoName);
+        todosList.checkAllTodosAreOnTheList(Arrays.asList(todoName));
     }
 
     @Step
@@ -57,8 +61,20 @@ public class UserActions {
 
     @Step
     public void userChecksIfTodoIsCreated() {
-        todosList.checkTodoIsOnTheList(todoName);
+        todosList.checkAllTodosAreOnTheList(Arrays.asList(todoName));
     }
 
+    public void userCreatesAFewTodos(List<String> names) {
+        this.todosNames = names;
+        for ( var name : todosNames) {
+            newTodoInput.enterTodoName(name);
+            newTodoInput.submitTodo();
+        }
+
+    }
+
+    public void userChecksIfAllTodosAreCreated(List<String> todos) {
+        todosList.checkAllTodosAreOnTheList(todos);
+    }
 }
 

@@ -6,17 +6,15 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TodosList extends PageObject {
 
     By todosListEl = By.cssSelector("#todo-list");
     By todoItemEl = By.cssSelector("#todo-list li");
 
     By todoCompleteToggleEl = By.cssSelector(".toggle");
-
-    @Step
-    public void checkTodoIsOnTheList(String name) {
-        find(todosListEl).shouldContainOnlyText("ggg");
-    }
 
     @Step
     public void checkTodosListIsEmpty() {
@@ -38,5 +36,20 @@ public class TodosList extends PageObject {
     @Step
     public void markTodoAsCompleted() {
         find(todoCompleteToggleEl).select();
+    }
+
+
+    @Step
+    public void checkAllTodosAreOnTheList(List<String> expectedNames) {
+        var todos = getDriver().findElements(todoItemEl);
+        var existingNames = new ArrayList<String>();
+        for ( var todo : todos) {
+            existingNames.add(todo.getText());
+        }
+
+//        MatcherAssert.assertThat("All todos are on the list in exact order", existingNames, Matchers.equalTo(expectedNames));
+        MatcherAssert.assertThat("All todos are on the list (order not important)", existingNames, Matchers.containsInAnyOrder(expectedNames.toArray()));
+//        MatcherAssert.assertThat("At least todos are on the list (order not important)", existingNames,
+//                Matchers.hasItems(expectedNames.toArray(new String[expectedNames.size()])));
     }
 }
