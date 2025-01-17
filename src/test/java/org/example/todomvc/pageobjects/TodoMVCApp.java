@@ -1,17 +1,13 @@
 package org.example.todomvc.pageobjects;
 
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.core.pages.PageObject;
 
-public class TodoMVCApp {
+public class TodoMVCApp extends PageObject {
 
-    WebDriver browser;
+
     String todoMVCUrl = "https://todomvc.com/examples/jquery/dist/#/all";
 
-    public TodoMVCApp(WebDriver browser) {
-        this.browser = browser;
-    }
-
     public void openMainView() {
-        browser.get(todoMVCUrl);
+        getDriver().get(todoMVCUrl);
     }
 }

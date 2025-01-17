@@ -1,25 +1,20 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class TodoFilters {
+public class TodoFilters extends PageObject {
     By completeTabEl = By.cssSelector("[href=\"#/completed\"]");
     By activeTabEl = By.cssSelector("[href=\"#/active\"]");
 
-    WebDriver browser;
-
-    public TodoFilters (WebDriver browser) {
-        this.browser = browser;
+    @Step
+   public void goToActiveTab() {
+        find(activeTabEl).click();
     }
 
-    public void goToActiveTab() {
-        var activeFilter = browser.findElement(activeTabEl);
-        activeFilter.click();
-    }
-
+    @Step
     public void goToCompletedTab() {
-        var completedFilter = browser.findElement(completeTabEl);
-        completedFilter.click();
+        find(completeTabEl).click();
     }
 }

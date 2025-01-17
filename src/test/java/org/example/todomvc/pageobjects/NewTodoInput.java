@@ -1,24 +1,22 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
-public class NewTodoInput {
-    WebDriver browser;
+public class NewTodoInput extends PageObject {
+
     By newTodoInputEl = By.cssSelector("#new-todo");
 
-    public NewTodoInput(WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public void enterTodoName(String name) {
-        var newTodoInput = browser.findElement(newTodoInputEl);
-        newTodoInput.sendKeys(name);
+        find(newTodoInputEl).type(name);
     }
 
+    @Step
     public void submitTodo() {
-        var newTodoInput = browser.findElement(newTodoInputEl);
-        newTodoInput.sendKeys(Keys.ENTER);
+        find(newTodoInputEl).sendKeys(Keys.ENTER);
     }
+
 }
