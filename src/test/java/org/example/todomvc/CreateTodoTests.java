@@ -23,5 +23,11 @@ public class CreateTodoTests extends BaseTestSetup {
         userActions.userChecksIfAllTodosAreCreated(expected);
     }
 
+    @Test
+    public void test() {
+        var env = System.getProperty("env", "nie ma");
+        System.out.println(env);
+    }
+
 }
 
