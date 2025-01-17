@@ -1,36 +1,55 @@
 package org.example.todomvc;
 
-import org.example.todomvc.steps.UserSteps;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import net.serenitybdd.annotations.Steps;
+import org.example.todomvc.steps.UserPreconditions;
 import org.junit.jupiter.api.Test;
 
 public class CompleteTodoTests extends BaseTestSetup {
 
+
+//
+//
+//    Given User has todo completed
+//    When user switch to active tab
+//    Then User checks if completed todo is not on ‘Active’ tab
+//
+//
+//    Given User complete the todo
+//    When user swich to complete tab
+//    Then User checks if completed todo is on ‘Completed’ tab
+
+
+
+    //    Given User has new todo created
+//    When User completes the todo
+//    Then User checks if it is marked as completed
+//
+
+    @Steps
+    UserPreconditions preconditions;
+
     @Test
     public void userCanCompleteATodo() {
         var name = "Zadanie do skonczenia";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(name);
-        steps.userCompletesTodo();
-        steps.userChecksIfTodoMarkedAsCompleted();
+        preconditions.userHasTodoCreated(name);
+        userActions.userCompletesTodo();
+        userActions.userChecksIfTodoMarkedAsCompleted();
     }
 
     @Test
     public void userCanFilterActiveTodos() {
         var name = "Zadanie XYZ";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(name);
-        steps.userCompletesTodo();
-        steps.userChecksIfCompletedTodoIsNotOnActiveTab();
+
+        preconditions.userHasCompletedTodo(name);
+        userActions.userChecksIfCompletedTodoIsNotOnActiveTab();
     }
 
     @Test
     public void  userCanFilterCompletedTodos() {
         var name = "Zadanie 123";
-        steps.userOpensTodoMVCapp();
-        steps.userCreatesANewTodo(name);
-        steps.userCompletesTodo();
-        steps.userChecksIfCompletedTodoIsOnCompletedTab();
+        userActions.userOpensTodoMVCapp();
+        userActions.userCreatesANewTodo(name);
+        userActions.userCompletesTodo();
+        userActions.userChecksIfCompletedTodoIsOnCompletedTab();
     }
 }
