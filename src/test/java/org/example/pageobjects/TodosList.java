@@ -26,7 +26,7 @@ public class TodosList {
         var el = browser.findElement(todoItemSelector);
         MatcherAssert.assertThat("Todo is marked as completed",
                 el.getAttribute("class"),
-                Matchers.containsString("completed"));
+                Matchers.containsString("completedxxx"));
     }
 
     public void checkListContainsAnyTodo() {

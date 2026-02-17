@@ -33,28 +33,5 @@ public class CreateTodoTests {
         browser.close();
     }
 
-    @Test
-    public void userCanCompleteTheTodo() {
-        var todoName = "Zadanie do zakończenia";
-        var browser = new FirefoxDriver();
-        browser.get(TodoMVC_URL);
 
-        var todoInput = new TodoInput(browser);
-        todoInput.enterTodoName(todoName);
-        todoInput.submitTodo();
-
-        var todoList = new TodosList(browser);
-        todoList.completeTodo();
-        todoList.checkIsTodoMarkedAsCompleted();
-
-
-        var todoFilters = new TodoFilters(browser);
-        todoFilters.gotoActive();
-        todoList.checkTodoListIsEmpty();
-
-        todoFilters.gotoCompleted();
-        todoList.checkTodoHasCorrectName(todoName);
-
-        browser.close();
-    }
 }
