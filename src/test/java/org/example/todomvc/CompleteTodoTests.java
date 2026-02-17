@@ -1,40 +1,34 @@
 package org.example.todomvc;
 
-import org.example.pageobjects.TodoFilters;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Test;
 
-public class CompleteTodoTests extends BaseTestSetup {
+import java.util.Arrays;
 
-    TodoFilters todoFilters = new TodoFilters(browser);
+public class CompleteTodoTests extends BaseTestSetup {
 
     @Test
     public void userCanCompleteTheTodo() {
         var todoName = "Zadanie do zakończenia";
-        todoInput.enterTodoName(todoName);
-        todoInput.submitTodo();
-
-        todoList.completeTodo();
-        todoList.checkIsTodoMarkedAsCompleted();
+        preconditions.userHasTodoCreated(todoName);
+        steps.userCompletesTodo();
+        steps.userChecksIfTodoMarkedAsCompleted();
     }
 
     @Test
     public void userCanFilterActiveTodos() {
         var todoName = "Zadanie do zakończenia kolejne";
-        todoInput.enterTodoName(todoName);
-        todoInput.submitTodo();
-        todoList.completeTodo();
-        todoFilters.gotoActive();
-        todoList.checkTodoListIsEmpty();
+        preconditions.userHasCompletedTodo(todoName);
+        steps.userGoesToActiveTodos();
+        steps.userChecksIfListIsEmpty();
     }
-
 
     @Test
     public void userCanFilterCompltedTodos() {
         var todoName = "Zadanie do zakończenia żółć";
-        todoInput.enterTodoName(todoName);
-        todoInput.submitTodo();
-        todoList.completeTodo();
-        todoFilters.gotoCompleted();
-        todoList.checkTodoHasCorrectName(todoName);
+        preconditions.userHasCompletedTodo(todoName);
+        steps.userGoesToCompletedTodos();
+        steps.userChecksIfTodoIsListed(todoName);
     }
 }
