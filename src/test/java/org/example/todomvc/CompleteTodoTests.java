@@ -10,7 +10,7 @@ public class CompleteTodoTests extends BaseTestSetup {
 
     @Test
     public void userCanCompleteTheTodo() {
-        var todoName = "Zadanie do zakończenia";
+        var todoName = testData.generateTodoName();
         preconditions.userHasTodoCreated(todoName);
         steps.userCompletesTodo();
         steps.userChecksIfTodoMarkedAsCompleted();
@@ -18,7 +18,7 @@ public class CompleteTodoTests extends BaseTestSetup {
 
     @Test
     public void userCanFilterActiveTodos() {
-        var todoName = "Zadanie do zakończenia kolejne";
+        var todoName = testData.generateTodoName();
         preconditions.userHasCompletedTodo(todoName);
         steps.userGoesToActiveTodos();
         steps.userChecksIfListIsEmpty();
@@ -26,7 +26,7 @@ public class CompleteTodoTests extends BaseTestSetup {
 
     @Test
     public void userCanFilterCompltedTodos() {
-        var todoName = "Zadanie do zakończenia żółć";
+        var todoName = testData.generateTodoName();
         preconditions.userHasCompletedTodo(todoName);
         steps.userGoesToCompletedTodos();
         steps.userChecksIfTodoIsListed(todoName);

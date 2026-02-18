@@ -7,14 +7,14 @@ public class CreateTodoTests extends BaseTestSetup {
 
     @Test
     public void userCanCreateANewTodo() {
-        var todoName = "Moje zadanie żółć";
+        var todoName = testData.generateTodoName();
         steps.userCreatesANewTodo(todoName);
         steps.userChecksIfTodoIsListed(todoName);
     }
 
     @Test
     public void userCanCreateAFewTodos() {
-        var todosNames = Arrays.asList("task 1", "task 2", "task 3", "task 4");
+        var todosNames = testData.generateFewTodoNames();
         steps.userCreatesFewTodos(todosNames);
         steps.userChecksAllTodos(todosNames);
     }

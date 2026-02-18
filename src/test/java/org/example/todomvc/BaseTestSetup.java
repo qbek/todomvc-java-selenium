@@ -8,6 +8,7 @@ import org.example.pageobjects.TodoInput;
 import org.example.pageobjects.TodosList;
 import org.example.steps.PreconditionSteps;
 import org.example.steps.UserSteps;
+import org.example.testdata.TestDataManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +29,9 @@ public abstract class BaseTestSetup {
 
     @Steps
     UserSteps steps;
+
+    @Steps
+    TestDataManager testData;
 
     @BeforeEach
     public void openApp() throws IOException {
