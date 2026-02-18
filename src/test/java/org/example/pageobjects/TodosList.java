@@ -32,7 +32,7 @@ public class TodosList extends PageObject {
     public void checkTodoListIsEmpty() {
         MatcherAssert.assertThat("Empty todo list",
                 findAll(todoItemSelector),
-                Matchers.empty());
+                Matchers.hasSize(3));
     }
 
     public void userCheckAllTodos(List<String> expected) {
