@@ -1,17 +1,12 @@
 package org.example.steps;
 
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.annotations.Steps;
+
 
 public class PreconditionSteps {
 
-    WebDriver browser;
+    @Steps
     UserSteps steps;
-
-    public PreconditionSteps(WebDriver browser) {
-        this.browser = browser;
-        steps = new UserSteps(browser);
-    }
-
 
     public void userHasTodoCreated(String todoName) {
       steps.userCreatesANewTodo(todoName);

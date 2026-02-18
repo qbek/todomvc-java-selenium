@@ -1,25 +1,24 @@
 package org.example.steps;
 
+import net.serenitybdd.annotations.Steps;
 import org.example.pageobjects.TodoFilters;
 import org.example.pageobjects.TodoInput;
 import org.example.pageobjects.TodosList;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class UserSteps {
 
-    WebDriver browser;
+    @Steps
     TodoInput todoInput;
-    TodosList todoList;
-    TodoFilters todoFilters;
 
-    public UserSteps(WebDriver browser) {
-        this.browser = browser;
-        todoInput = new TodoInput(browser);
-        todoList = new TodosList(browser);
-        todoFilters = new TodoFilters(browser);
-    }
+    @Steps
+    TodosList todoList;
+
+    @Steps
+    TodoFilters todoFilters;
 
     public void userCreatesANewTodo(String name) {
         todoInput.enterTodoName(name);
@@ -28,7 +27,8 @@ public class UserSteps {
 
     public void userChecksIfTodoIsListed(String name) {
         todoList.checkListContainsAnyTodo();
-        todoList.checkTodoHasCorrectName(name);
+        var todosList = Arrays.asList(name);
+        todoList.userCheckAllTodos(todosList);
     }
 
     public void userCompletesTodo() {
