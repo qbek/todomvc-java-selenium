@@ -70,4 +70,8 @@ public class UserSteps {
     public void userChecksAllTodos(List<String> todosNames) {
         todoList.userCheckAllTodos(todosNames);
     }
+
+    public void userWaitsForTheONE() {
+        todoList.waitForTheONE();
+    }
 }

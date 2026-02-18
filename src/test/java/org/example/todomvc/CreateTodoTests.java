@@ -18,4 +18,9 @@ public class CreateTodoTests extends BaseTestSetup {
         steps.userCreatesFewTodos(todosNames);
         steps.userChecksAllTodos(todosNames);
     }
+
+    @Test
+    public void userWaitsForTheONE() {
+        steps.userWaitsForTheONE();
+    }
 }

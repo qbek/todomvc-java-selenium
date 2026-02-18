@@ -1,12 +1,15 @@
 package org.example.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
+import org.awaitility.Awaitility;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 public class TodosList extends PageObject {
 
@@ -52,6 +55,31 @@ public class TodosList extends PageObject {
 //        MatcherAssert.assertThat("At least todos are on the list",
 //                todosOnThePage,
 //                Matchers.hasItems(expected.toArray(new String[expected.size()])));
+    }
+
+    public void waitForTheONE() {
+        var taskName = "THE ONE 2";
+        var waiter = new WaitForTheTask(taskName);
+        Awaitility
+                .await()
+                .atMost(15, TimeUnit.SECONDS)
+                .pollInterval(1, TimeUnit.SECONDS)
+                .until(waiter);
+    }
+
+    private class WaitForTheTask implements Callable<Boolean> {
+
+        private String name;
+
+        public WaitForTheTask(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+            System.out.println("Czekam....");
+            return find(todoListSelector).containsText(name);
+        }
     }
 }
 
