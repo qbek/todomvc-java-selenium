@@ -14,10 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.IOException;
+import java.util.Properties;
+
 @ExtendWith(SerenityJUnit5Extension.class)
 public abstract class BaseTestSetup {
-
-    String TodoMVC_URL = "https://todomvc.com/examples/jquery/dist/#/all";
 
     @Managed(driver = "firefox")
     WebDriver browser;
@@ -29,8 +30,13 @@ public abstract class BaseTestSetup {
     UserSteps steps;
 
     @BeforeEach
-    public void openApp() {
-        browser.get(TodoMVC_URL);
+    public void openApp() throws IOException {
+        var envName = System.getProperty("env");
+        var configFile = this.getClass().getResourceAsStream("/" + envName + "_env.properties");
+        var config = new Properties();
+        config.load(configFile);
+
+        browser.get(config.getProperty("todoMVC_url"));
     }
 
     @AfterEach

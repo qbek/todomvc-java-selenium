@@ -21,4 +21,10 @@ public class HelloWorldTests {
         browser.close();
     }
 
+    @Test
+    public void sysProperties() {
+        var env = System.getProperty("wajcha");
+        System.out.println(env);
+    }
+
 }
