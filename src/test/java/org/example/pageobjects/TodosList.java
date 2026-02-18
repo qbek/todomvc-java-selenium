@@ -5,6 +5,9 @@ import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TodosList {
 
     private By todoListSelector = By.cssSelector("#todo-list");
@@ -47,6 +50,26 @@ public class TodosList {
         var todoList = browser.findElement(todoListSelector);
         MatcherAssert.assertThat("Todo has correct name",
                 todoList.getText(),
-                Matchers.equalTo(name));
+                Matchers.containsString(name));
+    }
+
+    public void userCheckAllTodos(List<String> expected) {
+        var allTodos = browser.findElements(todoItemSelector);
+        var todosOnThePage = new ArrayList<String>();
+        for (var todo : allTodos) {
+            todosOnThePage.add(todo.getText());
+        }
+        MatcherAssert.assertThat("All todos are on the list in exact order",
+                todosOnThePage,
+                Matchers.equalTo(expected));
+//
+//        MatcherAssert.assertThat("All todos are on the list in any order",
+//                todosOnThePage,
+//                Matchers.containsInAnyOrder(expected.toArray()));
+
+//        MatcherAssert.assertThat("At least todos are on the list",
+//                todosOnThePage,
+//                Matchers.hasItems(expected.toArray(new String[expected.size()])));
     }
 }
+

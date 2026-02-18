@@ -5,6 +5,8 @@ import org.example.pageobjects.TodoInput;
 import org.example.pageobjects.TodosList;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
+
 public class UserSteps {
 
     WebDriver browser;
@@ -47,5 +49,15 @@ public class UserSteps {
 
     public void userGoesToCompletedTodos() {
         todoFilters.gotoCompleted();
+    }
+
+    public void userCreatesFewTodos(List<String> todosNames) {
+        for (var name : todosNames) {
+            userCreatesANewTodo(name);
+        }
+    }
+
+    public void userChecksAllTodos(List<String> todosNames) {
+        todoList.userCheckAllTodos(todosNames);
     }
 }
