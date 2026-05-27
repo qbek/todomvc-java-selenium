@@ -72,7 +72,6 @@ public class BasicExercisesTest {
 //                redCheckbox.isSelected(),
 //                Matchers.equalTo(true));
 
-
         var blueCheckbox = browser.findElement(By.cssSelector("[name=\"blue\"]"));
         blueCheckbox.click();
 
@@ -99,10 +98,33 @@ public class BasicExercisesTest {
         var textFiledToggle = browser.findElement(By.cssSelector(".custom-control-label"));
         textFiledToggle.click();
 
-
         MatcherAssert.assertThat("After pressing toggle text area is enabled",
                 textField.isEnabled(),
                 Matchers.equalTo(true));
+        browser.close();
+    }
+
+    @Test
+    public void exercise_3() {
+        var browser = new FirefoxDriver();
+        browser.get("https://qbek.github.io/selenium-exercises/pl/radio_buttons.html");
+
+        var rmffm = browser.findElement(By.cssSelector("[value=\"rmffm\"]"));
+        rmffm.click();
+
+        var rmffmLink = browser.findElement(By.cssSelector("#rmffm-details a"));
+        MatcherAssert.assertThat("Link to rmffm is visible",
+                rmffmLink.isDisplayed(),
+                Matchers.equalTo(true));
+        MatcherAssert.assertThat("Link to rmffm is correct",
+                rmffmLink.getAttribute("href"),
+                Matchers.equalTo("https://www.rmf.fm/"));
+
+        //anty-pattern: podążanie za linkami jest funkcjonalnoscia przegladarki
+//        rmffmLink.click();
+//        MatcherAssert.assertThat("correct page is open",
+//                browser.getTitle(),
+//                Matchers.equalTo("Radio RMF FM - Najlepsza muzyka"));
         browser.close();
     }
 }
