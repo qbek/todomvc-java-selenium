@@ -58,4 +58,51 @@ public class BasicExercisesTest {
                 Matchers.equalTo("kuba@wp.pl"));
         browser.close();
     }
+
+    @Test
+    public void exercise_2a() {
+        var browser = new FirefoxDriver();
+        browser.get("https://qbek.github.io/selenium-exercises/pl/check_boxes.html");
+
+        var redCheckbox = browser.findElement(By.cssSelector("[name=\"red\"]"));
+        redCheckbox.click();
+        //ANTYPATTERN - funkcjonalnosc checkboxow jest funkcjonalnoscia przegladarki
+        // funkcji przegladarki NIE TEST-TU-JE-MY!!!!
+//        MatcherAssert.assertThat("After click checkbox is selected",
+//                redCheckbox.isSelected(),
+//                Matchers.equalTo(true));
+
+
+        var blueCheckbox = browser.findElement(By.cssSelector("[name=\"blue\"]"));
+        blueCheckbox.click();
+
+        var light = browser.findElement(By.cssSelector("#light"));
+        MatcherAssert.assertThat("Light has pink color",
+                light.getAttribute("data-color"),
+                Matchers.equalTo("#FF00FF"));
+        browser.close();
+    }
+
+    @Test
+    public void exercise_2b() {
+        var browser = new FirefoxDriver();
+        browser.get("https://qbek.github.io/selenium-exercises/pl/check_boxes.html");
+
+        var textField = browser.findElement(By.cssSelector("#text"));
+
+        MatcherAssert.assertThat("At the start text area is disabled",
+                textField.isEnabled(),
+                Matchers.equalTo(false));
+
+        // czasami trzeba kliknac w element ktory przykrywa element docelowy
+        // (w naszym przypadku checkbox #switch)
+        var textFiledToggle = browser.findElement(By.cssSelector(".custom-control-label"));
+        textFiledToggle.click();
+
+
+        MatcherAssert.assertThat("After pressing toggle text area is enabled",
+                textField.isEnabled(),
+                Matchers.equalTo(true));
+        browser.close();
+    }
 }
