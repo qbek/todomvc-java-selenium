@@ -1,30 +1,8 @@
 package org.example.todomvc;
 
-import org.example.todomvc.pageobjects.NewTodoInputPO;
-import org.example.todomvc.pageobjects.TodoMVCApp;
-import org.example.todomvc.pageobjects.TodosListPO;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class CreateTodoTest {
-
-    private WebDriver browser = new FirefoxDriver();
-    private TodoMVCApp app = new TodoMVCApp(browser);
-    private NewTodoInputPO newTodoInput = new NewTodoInputPO(browser);
-    private TodosListPO todosList = new TodosListPO(browser);
-
-    @AfterEach
-    public void closeBrowser() {
-        browser.close();
-    }
+public class CreateTodoTest extends BaseTestSetup {
 
     @Test
     public void userCanCreateATodo() {
