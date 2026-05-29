@@ -1,10 +1,10 @@
 package org.example.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class TodosListPO extends PageObject {
     private final static By TODO_LIST = By.cssSelector("#todo-list");
@@ -12,11 +12,13 @@ public class TodosListPO extends PageObject {
     private final static By TODO_COMPLETE_TOGGGLE = By.cssSelector(".toggle");
 
 
+    @Step
     public void completeTodo() {
         var todoCompleteToggle = getDriver().findElement(TODO_COMPLETE_TOGGGLE);
         todoCompleteToggle.click();
     }
 
+    @Step
     public void checkTodoIsOnTheList(String name) {
         var todoLabel = getDriver().findElement(TODO_LIST);
         MatcherAssert.assertThat("Created todo has valid name",
@@ -24,6 +26,7 @@ public class TodosListPO extends PageObject {
                 Matchers.equalTo(name));
     }
 
+    @Step
     public void checkTodoListIsEmpty() {
         var todosList = getDriver().findElement(TODO_LIST);
         MatcherAssert.assertThat("Todos list is empty",
@@ -31,6 +34,7 @@ public class TodosListPO extends PageObject {
                 Matchers.emptyString());
     }
 
+    @Step
     public void checkTodoMarkedAsCompleted() {
         var todoElement = getDriver().findElement(TODO_ELEMENT);
         MatcherAssert.assertThat("Todo is marked as completed",
