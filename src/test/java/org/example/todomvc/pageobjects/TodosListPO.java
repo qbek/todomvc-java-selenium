@@ -2,12 +2,15 @@ package org.example.todomvc.pageobjects;
 
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
+import org.awaitility.Awaitility;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class TodosListPO extends PageObject {
     private final static By TODO_LIST = By.cssSelector("#todo-list");
@@ -56,5 +59,28 @@ public class TodosListPO extends PageObject {
 //                todosLabels,
 //                Matchers.hasItems(expectedTodos.toArray(new String[0])));
 
+    }
+
+    public void awaitForTheONE() {
+        Awaitility.await()
+                .pollInSameThread()
+                .atMost(Duration.ofSeconds(20))
+                .pollInterval(Duration.ofSeconds(1))
+                .until(new WaitForTheOne("CO??"));
+    }
+
+    private class WaitForTheOne implements Callable<Boolean> {
+
+        private String expectedTodo;
+
+        public WaitForTheOne(String todoName) {
+            this.expectedTodo = todoName;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+            System.out.println("Sprawdzam!!! i może czekam");
+            return find(TODO_LIST).containsText(expectedTodo);
+        }
     }
 }

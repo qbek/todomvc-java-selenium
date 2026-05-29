@@ -40,4 +40,8 @@ public class ThenSteps {
     public void userChecksAllTodosListed(List<String> todos) {
         todosList.checkTodoListContainsAllTodos(todos);
     }
+
+    public void awaitlityWaitsForTheONE() {
+        todosList.awaitForTheONE();
+    }
 }

@@ -21,4 +21,10 @@ public class CreateTodoTest extends BaseTestSetup {
         when.userCreatesAFewTodos(todos);
         then.userChecksAllTodosListed(todos);
     }
+
+    public void userWaitsForTheONE() {
+        given.userHasTodoMvcAppOpened();
+        when.userCreatesANewTodo("The ONE");
+        then.awaitlityWaitsForTheONE();
+    }
 }
