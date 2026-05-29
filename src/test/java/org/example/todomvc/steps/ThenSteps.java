@@ -7,6 +7,7 @@ import org.example.todomvc.pageobjects.TodoFiltersPO;
 import org.example.todomvc.pageobjects.TodoMVCApp;
 import org.example.todomvc.pageobjects.TodosListPO;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ThenSteps {
@@ -22,7 +23,8 @@ public class ThenSteps {
 
     @Step
     public void userCheckTodoIsOnTodosList(String todoName) {
-        todosList.checkTodoIsOnTheList(todoName);
+        var expectedTodos = Arrays.asList(todoName);
+        todosList.checkTodoListContainsAllTodos(expectedTodos);
     }
 
     @Step

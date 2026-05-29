@@ -12,13 +12,11 @@ public class TodoFiltersPO extends PageObject {
 
     @Step
     public void gotoActiveTodos() {
-        var activeTodosFilter = getDriver().findElement(ACTIVE_TODOS_FILTER);
-        activeTodosFilter.click();
+        find(ACTIVE_TODOS_FILTER).click();
     }
 
     @Step
     public void gotoCompletedTodos() {
-        var completedTodosFilter = getDriver().findElement(COMPLETED_TODOS_FILTER);
-        completedTodosFilter.click();
+        find(COMPLETED_TODOS_FILTER).click();
     }
 }

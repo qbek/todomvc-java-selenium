@@ -10,13 +10,11 @@ public class NewTodoInputPO extends PageObject {
 
     @Step
     public void enterTodoName(String name) {
-        var newTodoInput = getDriver().findElement(NEW_TODO_INPUT_SELECTOR);
-        newTodoInput.sendKeys(name);
+        find(NEW_TODO_INPUT_SELECTOR).type(name);
     }
 
     @Step
     public void submitTodo() {
-        var newTodoInput = getDriver().findElement(NEW_TODO_INPUT_SELECTOR);
-        newTodoInput.sendKeys(Keys.ENTER);
+        find(NEW_TODO_INPUT_SELECTOR).sendKeys(Keys.ENTER);
     }
 }

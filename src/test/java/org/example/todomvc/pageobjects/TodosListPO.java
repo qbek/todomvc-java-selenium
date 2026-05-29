@@ -6,6 +6,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TodosListPO extends PageObject {
@@ -16,47 +17,44 @@ public class TodosListPO extends PageObject {
 
     @Step
     public void completeTodo() {
-        var todoCompleteToggle = getDriver().findElement(TODO_COMPLETE_TOGGGLE);
-        todoCompleteToggle.click();
-    }
-
-    @Step
-    public void checkTodoIsOnTheList(String name) {
-        var todoLabel = getDriver().findElement(TODO_LIST);
-        MatcherAssert.assertThat("Created todo has valid name",
-                todoLabel.getText(),
-                Matchers.equalTo(name));
+        find(TODO_COMPLETE_TOGGGLE).click();
     }
 
     @Step
     public void checkTodoListIsEmpty() {
-        var todosList = getDriver().findElement(TODO_LIST);
         MatcherAssert.assertThat("Todos list is empty",
-                todosList.getText(),
+                find(TODO_LIST).getText(),
                 Matchers.emptyString());
     }
 
     @Step
     public void checkTodoMarkedAsCompleted() {
-        var todoElement = getDriver().findElement(TODO_ELEMENT);
         MatcherAssert.assertThat("Todo is marked as completed",
-                todoElement.getAttribute("class"),
+                find(TODO_ELEMENT).getAttribute("class"),
                 Matchers.containsString("completed")
         );
     }
 
-    public void checkTodoListContainsAllTodos(List<String> todos) {
-        var todosList = getDriver().findElement(TODO_LIST);
-        var allTodos = todosList.getText();
-        for (var todo :todos) {
-            MatcherAssert.assertThat("Todos list contains todo",
-                    allTodos,
-                    Matchers.containsString(todo));
+    @Step
+    public void checkTodoListContainsAllTodos(List<String> expectedTodos) {
+        var todosElements = getDriver().findElements(TODO_ELEMENT);
+        var todosLabels = new ArrayList<String>();
+
+        for (var todoEl : todosElements) {
+            todosLabels.add(todoEl.getText());
         }
 
-        var allTodoElements = getDriver().findElements(TODO_ELEMENT);
-        MatcherAssert.assertThat("There is correct count of todos",
-                allTodoElements,
-                Matchers.hasSize(todos.size()));
+        MatcherAssert.assertThat("All todos are on the list in exact order",
+                todosLabels,
+                Matchers.equalTo(expectedTodos));
+
+//        MatcherAssert.assertThat("All todos but in any order",
+//                todosLabels,
+//                Matchers.containsInAnyOrder(expectedTodos.toArray()));
+
+//        MatcherAssert.assertThat("At least todos are on the list",
+//                todosLabels,
+//                Matchers.hasItems(expectedTodos.toArray(new String[0])));
+
     }
 }

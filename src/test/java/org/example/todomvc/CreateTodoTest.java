@@ -16,10 +16,9 @@ public class CreateTodoTest extends BaseTestSetup {
 
     @Test
     public void userCanCreateAFewTodos() {
-        var todos = Arrays.asList("zadanie 1111", "zadanie 2222", "zadanie 3333", "zadanie 3333");
-        var exp = Arrays.asList("zadanie 1", "zadanie 22", "zadanie 3");
+        var todos = Arrays.asList("zadanie 1", "zadanie 2", "zadanie 3", "po poprzednim tescie");
         given.userHasTodoMvcAppOpened();
         when.userCreatesAFewTodos(todos);
-        then.userChecksAllTodosListed(exp);
+        then.userChecksAllTodosListed(todos);
     }
 }
