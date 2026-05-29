@@ -18,4 +18,11 @@ public class HelloWorldTest {
         Thread.sleep(3000);
         browser.close();
     }
+
+    @Test
+    public void envValue() {
+        System.out.println("A teraz pokaze wam");
+        System.out.println("Trochę magiii.....");
+        System.out.println("mam na imie: " + System.getProperty("name"));
+    }
 }
