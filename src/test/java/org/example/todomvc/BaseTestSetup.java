@@ -3,6 +3,7 @@ package org.example.todomvc;
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.example.todomvc.data.RandomDataProvider;
 import org.example.todomvc.steps.GivenSteps;
 import org.example.todomvc.steps.ThenSteps;
 import org.example.todomvc.steps.WhenSteps;
@@ -24,6 +25,9 @@ abstract public class BaseTestSetup {
 
     @Steps
     protected ThenSteps then;
+
+    @Steps
+    protected RandomDataProvider testData;
 
     @AfterEach
     public void closeBrowser() {
