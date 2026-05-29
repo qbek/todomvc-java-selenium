@@ -6,6 +6,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class TodosListPO extends PageObject {
     private final static By TODO_LIST = By.cssSelector("#todo-list");
     private final static By TODO_ELEMENT = By.cssSelector("#todo-list li");
@@ -41,5 +43,20 @@ public class TodosListPO extends PageObject {
                 todoElement.getAttribute("class"),
                 Matchers.containsString("completed")
         );
+    }
+
+    public void checkTodoListContainsAllTodos(List<String> todos) {
+        var todosList = getDriver().findElement(TODO_LIST);
+        var allTodos = todosList.getText();
+        for (var todo :todos) {
+            MatcherAssert.assertThat("Todos list contains todo",
+                    allTodos,
+                    Matchers.containsString(todo));
+        }
+
+        var allTodoElements = getDriver().findElements(TODO_ELEMENT);
+        MatcherAssert.assertThat("There is correct count of todos",
+                allTodoElements,
+                Matchers.hasSize(todos.size()));
     }
 }

@@ -7,6 +7,8 @@ import org.example.todomvc.pageobjects.TodoFiltersPO;
 import org.example.todomvc.pageobjects.TodoMVCApp;
 import org.example.todomvc.pageobjects.TodosListPO;
 
+import java.util.List;
+
 public class WhenSteps {
 
     @Steps
@@ -37,5 +39,11 @@ public class WhenSteps {
     @Step
     public void userGoesToCompletedTodos() {
         todoFilters.gotoCompletedTodos();
+    }
+
+    public void userCreatesAFewTodos(List<String> todos) {
+        for (var todo :todos) {
+            userCreatesANewTodo(todo);
+        }
     }
 }

@@ -7,6 +7,8 @@ import org.example.todomvc.pageobjects.TodoFiltersPO;
 import org.example.todomvc.pageobjects.TodoMVCApp;
 import org.example.todomvc.pageobjects.TodosListPO;
 
+import java.util.List;
+
 public class ThenSteps {
 
     @Steps
@@ -31,5 +33,9 @@ public class ThenSteps {
     @Step
     public void userChecksTodosListIsEmpty() {
         todosList.checkTodoListIsEmpty();
+    }
+
+    public void userChecksAllTodosListed(List<String> todos) {
+        todosList.checkTodoListContainsAllTodos(todos);
     }
 }
