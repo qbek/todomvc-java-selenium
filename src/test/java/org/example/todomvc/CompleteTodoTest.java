@@ -3,12 +3,10 @@ package org.example.todomvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CompleteTodoTest extends BaseTestSetup{
+public class CompleteTodoTest extends BaseTestSetup {
 
     @BeforeEach
-    public void prepareApp() {
-        given.userHasTodoMvcAppOpened();
-    }
+    public void prepareApp() { given.userHasTodoMvcAppOpened(); }
 
     @Test
     public void userCanCompleteATodo() {

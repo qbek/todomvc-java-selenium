@@ -1,28 +1,14 @@
 package org.example.todomvc.steps;
 
-import org.example.todomvc.pageobjects.NewTodoInputPO;
-import org.example.todomvc.pageobjects.TodoFiltersPO;
+import net.serenitybdd.annotations.Steps;
 import org.example.todomvc.pageobjects.TodoMVCApp;
-import org.example.todomvc.pageobjects.TodosListPO;
-import org.openqa.selenium.WebDriver;
 
 public class GivenSteps {
 
+    @Steps
     private TodoMVCApp app;
-    private NewTodoInputPO newTodoInput;
-    private TodosListPO todosList;
-    private TodoFiltersPO todoFilters;
-
+    @Steps
     private WhenSteps when;
-
-
-    public GivenSteps (WebDriver browser) {
-        app = new TodoMVCApp(browser);
-        newTodoInput = new NewTodoInputPO(browser);
-        todosList = new TodosListPO(browser);
-        todoFilters = new TodoFiltersPO(browser);
-        when = new WhenSteps(browser);
-    }
 
     public void userHasTodoMvcAppOpened() {
         app.openTodoMVCPage();
@@ -34,6 +20,6 @@ public class GivenSteps {
 
     public void userHasCompletedTodo(String todoName) {
         userHasTodoCreated(todoName);
-        todosList.completeTodo();
+        when.userCompletesTodo();
     }
 }

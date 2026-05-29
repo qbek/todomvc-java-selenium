@@ -1,5 +1,6 @@
 package org.example.todomvc.steps;
 
+import net.serenitybdd.annotations.Steps;
 import org.example.todomvc.pageobjects.NewTodoInputPO;
 import org.example.todomvc.pageobjects.TodoFiltersPO;
 import org.example.todomvc.pageobjects.TodoMVCApp;
@@ -8,17 +9,14 @@ import org.openqa.selenium.WebDriver;
 
 public class ThenSteps {
 
+    @Steps
     private TodoMVCApp app;
+    @Steps
     private NewTodoInputPO newTodoInput;
+    @Steps
     private TodosListPO todosList;
+    @Steps
     private TodoFiltersPO todoFilters;
-
-    public ThenSteps (WebDriver browser) {
-        app = new TodoMVCApp(browser);
-        newTodoInput = new NewTodoInputPO(browser);
-        todosList = new TodosListPO(browser);
-        todoFilters = new TodoFiltersPO(browser);
-    }
 
 
     public void userCheckTodoIsOnTodosList(String todoName) {

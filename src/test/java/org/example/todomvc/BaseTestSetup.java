@@ -1,17 +1,29 @@
 package org.example.todomvc;
 
+import net.serenitybdd.annotations.Managed;
+import net.serenitybdd.annotations.Steps;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.example.todomvc.steps.GivenSteps;
 import org.example.todomvc.steps.ThenSteps;
 import org.example.todomvc.steps.WhenSteps;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
+@ExtendWith(SerenityJUnit5Extension.class)
 abstract public class BaseTestSetup {
-    protected WebDriver browser = new FirefoxDriver();
-    protected GivenSteps given = new GivenSteps(browser);
-    protected WhenSteps when = new WhenSteps(browser);
-    protected ThenSteps then = new ThenSteps(browser);
+
+    @Managed(driver = "firefox")
+    protected WebDriver browser;
+
+    @Steps
+    protected GivenSteps given;
+
+    @Steps
+    protected WhenSteps when;
+
+    @Steps
+    protected ThenSteps then;
 
     @AfterEach
     public void closeBrowser() {
