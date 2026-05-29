@@ -9,8 +9,11 @@ import org.example.todomvc.steps.ThenSteps;
 import org.example.todomvc.steps.WhenSteps;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(SerenityJUnit5Extension.class)
 abstract public class BaseTestSetup {
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class HelloWorldTest {
+public class HelloWorld {
 
     @Test
     public void helloWorld() {

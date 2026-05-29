@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class BasicExercisesTest {
+public class BasicExercises {
 
     @Test
     public void exercise_1() throws InterruptedException {
